@@ -1,0 +1,164 @@
+A brief history of specifications is given below.  Websites are given where the
+official specification lives, but they have all been copied into this directory
+for convenience.  Note that some of these links may be broken.
+
+RFCs (http://www.irchelp.org/irchelp/rfc/):
+  RFC 1459 (original RFC; superseded by RFC 2810 - RFC 2813)
+    http://tools.ietf.org/html/rfc1459
+  RFC 2810 (IRC architecture)
+    http://tools.ietf.org/html/rfc2810
+  RFC 2811 (IRC channel management)
+    http://tools.ietf.org/html/rfc2811
+    This mostly applies only to servers
+  RFC 2812 (IRC client protocol)
+    http://tools.ietf.org/html/rfc2812
+  RFC 2813 (IRC server protocol)
+    http://tools.ietf.org/html/rfc2813
+    This applies only to servers
+  Summaries of all the numeric codes:
+    http://www.irchelp.org/irchelp/ircd/numerics.html
+    http://www.mirc.net/raws/
+
+File Transfer / CTCP extensions:
+  DCC specification (included fully in the CTCP specification)
+    http://www.irchelp.org/irchelp/rfc/dccspec.html
+  CTCP specification
+    http://www.alien.net.au/irc/ctcp.txt
+  Updated CTCP specification
+    http://www.invlogic.com/irc/ctcp.html
+    This is not fully supported by clients
+  Turbo DCC
+    http://www.visualirc.net/tech-tdcc.php
+  DCC REVERSE
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/DCC_REVERSE?rev=1.4
+  RDCC / DCC RSEND / Reverse/Firewall DCC / FSERVs
+  XDCC (eXtended DCC)
+    http://xa.bi/files/irc/xdcc.3.3.0b.irc
+  CTCP/2
+    http://www.invlogic.com/irc/ctcp2_intro.html
+  SDCC / DCC SCHAT (Secure DCC)
+  DCC Voice
+  DCC2 (superseds DCC, CTCP, updated CTCP, CTCP/2) -- http://www.dcc2.org/
+    http://tools.ietf.org/html/draft-smith-irc-dcc2-negotiation-00
+    http://www.dcc2.org/files/dcc2/draft-smith-irc-dcc2-files-00.txt
+    http://www.dcc2.org/files/dcc2/draft-smith-irc-dcc2-negotiation-00.txt
+    This doesn't seem done
+  DCC Resume
+    http://www.mirc.co.uk/help/dccresum.txt
+  See http://www.kvirc.de/docu/doc_dcc_connection.html for an overall comparison
+  and explanation of the extensions to DCC.
+
+Encryption:
+  SED/CAST5/BLOWFISH/AES reference implementation
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/include/sedcrypt.h?rev=1.12
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/source/crypt.c?rev=1.42
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/source/crypto.c?rev=1.17
+  FiSH
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/fish?rev=1.1
+
+Extension Negotiation:
+  ISUPPORT
+    The 005 numeric
+      http://www.irc.org/tech_docs/005.html
+    ISupport numeric
+      http://tools.ietf.org/html/draft-brocklesby-irc-isupport-03
+      Response code 005; supported by most servers
+    Updated ISupport numeric
+      http://tools.ietf.org/html/draft-hardy-irc-isupport-00
+  CAPAB
+    IRC client capabilities negotiation
+      http://tools.ietf.org/html/draft-baudis-irc-capab-00
+    Client Capab Proposal (v5)
+      http://www.leeh.co.uk/ircd/client-cap.txt
+    IRC Client Capabilities Extension
+      http://tools.ietf.org/html/draft-mitchell-irc-capabilities-01
+      http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html
+      Standardization for reporting extensions
+
+Authentication:
+  SASL authentication (PLAIN and BLOWFISH)
+    http://hg.atheme.org/atheme/raw-file/tip/doc/SASL
+      Note: amlsbGVzAGppbGxlcwBzZXNhbWU= is base64 encoded jilles\0jilles\0sesame
+    Depends on IRC Capabilities
+    Simple Authentication and Security Layer (SASL)
+      http://tools.ietf.org/html/rfc2222 (obsolete)
+      http://tools.ietf.org/html/rfc4422
+    The PLAIN Simple Authentication and Security Layer (SASL) Mechanism
+      http://tools.ietf.org/html/rfc2595 (obsolete)
+      http://tools.ietf.org/html/rfc4616
+  NickServ
+  Auth?
+  Ident
+    http://tools.ietf.org/html/rfc1413
+  TLS/SSL
+    http://tools.ietf.org/html/draft-hartmann-default-port-for-irc-via-tls-ssl-07
+
+Services:
+  IRC+ (http://irc-plus.org/en/ and http://about.psyc.eu/IRCPLUS)
+    IRC+ Conference Control Protocol
+      http://www.irc-plus.org/specs/confctrl-draft.html
+    IRC+ Identity Protocol
+      http://www.irc-plus.org/specs/identity-draft.html
+    IRC Subscriptions Protocol
+      http://www.irc-plus.org/specs/subscriptions-draft.html
+  Anope
+    http://www.anope.org/docgen/1.8/
+  Atheme
+  IRC Services 5
+  Sirv
+  Epona
+  rserv
+  srvx
+  HybServ2
+  KickServices
+
+URL Scheme:
+  irc:
+    http://tools.ietf.org/html/draft-mirashi-url-irc-01
+  irc: and ircs:
+    http://tools.ietf.org/html/draft-butcher-irc-url-04
+
+Colors:
+  ircle colors
+    http://www.ircle.com/colorfaq.shtml
+  mIRC colors
+    http://www.mirc.com/colors.html
+  EPIC colors (modified mIRC)
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/color.txt?rev=1.1.1.1
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/colors?rev=1.1.1.1
+
+Other:
+  Command Prefix Capability (USERCMDPFX)
+    http://tools.ietf.org/html/draft-brocklesby-irc-usercmdpfx-02
+  DCC Whiteboard Specification
+    http://www.visualirc.net/tech-wboard.php
+  IRCX (extends RFC 1459)
+    http://tools.ietf.org/html/draft-pfenning-irc-extensions-04
+    Microsoft's extension to IRC
+  MONITOR
+    http://hg.atheme.org/charybdis/raw-file/tip/doc/monitor.txt
+  WATCH
+    http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/raw-file/tip/reference/draft-meglio-irc-watch-00.txt
+  User Mode +g
+    http://hg.atheme.org/charybdis/raw-file/tip/doc/modeg.txt
+  Services compatibility
+    http://hg.atheme.org/charybdis/raw-file/tip/doc/services.txt
+  Account-Notify client capability specification
+    http://hg.atheme.org/charybdis/raw-file/tip/doc/account-notify.txt
+  Target change for Messages
+    http://hg.atheme.org/charybdis/raw-file/tip/doc/tgchange.txt
+  NAMESX
+    http://wiki.inspircd.org/Modules/namesx
+    Send all modes of a user
+  STARTTLS
+    http://wiki.inspircd.org/STARTTLS_Documentation
+  General comparison of feature support
+    http://www.alien.net.au/irc/
+  Extended Join
+    http://git.atheme.org/charybdis/plain/doc/extended-join.txt
+  TS4
+    http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/TS4?rev=1.1.1.1
+  Handshake
+    http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/raw-file/tip/reference/draft-meglio-irc-handshake-00.txt
+  snomasks
+    http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/raw-file/tip/reference/snomasks.txt
