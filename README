@@ -91,7 +91,7 @@ Authentication:
   Ident
     http://tools.ietf.org/html/rfc1413
   TLS/SSL
-    http://tools.ietf.org/html/draft-hartmann-default-port-for-irc-via-tls-ssl-07
+    http://tools.ietf.org/html/draft-hartmann-default-port-for-irc-via-tls-ssl-09
 
 Services:
   IRC+ (http://irc-plus.org/en/ and http://about.psyc.eu/IRCPLUS)

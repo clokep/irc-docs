@@ -1,12 +1,12 @@
 Internet Draft                                          Richard Hartmann
 Independent Submission
 Intended status: Informational
-Expires: October 23, 2011
-Updates: 1459, 2812, 2813
-                                                          April 23, 2011
+Expires: July 22, 2014
+Updates: 1459
+                                                        January 22, 2014
 
                     Default Port for IRC via TLS/SSL
-           draft-hartmann-default-port-for-irc-via-tls-ssl-07
+           draft-hartmann-default-port-for-irc-via-tls-ssl-10
 
 Abstract
 
@@ -51,7 +51,7 @@ Copyright Notice
 
 Hartmann                                                        [Page 1]
 
-Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
+Internet Draft      Default Port for IRC via TLS/SSL    January 22, 2014
 
 
 Table of Contents
@@ -59,15 +59,15 @@ Table of Contents
    1. Rationale .....................................................  3
    2. Technical Details .............................................  3
       2.1. Connection Establishment .................................  3
-      2.2. Why Not STARTTLS .........................................  3
-      2.3. Certiticate Details ......................................  4
-         2.3.1. Server Certificate ..................................  4
-         2.3.2. Client Certificate ..................................  4
+      2.2. Certiticate Details ......................................  3
+         2.2.1. Server Certificate ..................................  3
+         2.2.2. Client Certificate ..................................  3
    3. Security Considerations .......................................  4
-   4. IANA Considerations ...........................................  5
-   5. Informative References ........................................  5
+   4. IANA Considerations ...........................................  4
+   5. Informative References ........................................  4
    5. Normative References ..........................................  5
-   6. Acknowledgements ..............................................  6
+   6. Acknowledgements ..............................................  5
+
 
 
 
@@ -107,7 +107,7 @@ Table of Contents
 
 Hartmann                                                        [Page 2]
 
-Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
+Internet Draft      Default Port for IRC via TLS/SSL    January 22, 2014
 
 
 1. Rationale
@@ -143,32 +143,9 @@ Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
    and implementation details can vary wildly. Most implementations
    regard the latter RFCs as suggestions, not as binding.
 
-2.2. Why Not STARTTLS
+2.2. Certiticate Details
 
-   Due to the highly asynchronous nature of IRC, everything other than
-   suspending the whole connection, running STARTTLS and resuming the
-   connection wouldn't work.  As there is no concept of suspended con-
-   nections in IRC, this would require significant effort on the server
-   side and effort on the client side, as well.
-
-   The general consensus is that STARTTLS is not worth the effort and
-   that no one is willing to implement it.
-
-   While newer protocols can easily design for STARTTLS from the start,
-   IRC is a legacy protocol; implementing STARTTLS in IRC is not realis-
-   tic.
-
-
-
-
-Hartmann                                                        [Page 3]
-
-Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
-
-
-2.3. Certiticate Details
-
-2.3.1. Server Certificate
+2.2.1. Server Certificate
 
    The IRC server's certificate should be issued by a commonly trusted
    CA.
@@ -178,9 +155,17 @@ Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
 
    The IRC client should verify the certificate.
 
-2.3.2. Client Certificate
+2.2.2. Client Certificate
 
    If the client is using a certificate as well, it should be issued by
+
+
+
+Hartmann                                                        [Page 3]
+
+Internet Draft      Default Port for IRC via TLS/SSL    January 22, 2014
+
+
    a commonly trusted CA or a CA designated by the IRC network.
 
    The certificate's Common Name should match the main IRC nickname.
@@ -213,18 +198,10 @@ Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
    any of the threats above.
 
    This document does not address server links as there are no commonly
-   accepted ports or even back-end protocols.  Ports and back-end
-
-
-
-Hartmann                                                        [Page 4]
-
-Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
-
-
-   protocols are normally established in a bilateral agreement.  All
-   operators are encouraged to use strong encryption for back-end traf-
-   fic, no matter if they offer IRC via TLS/SSL to end users.
+   accepted ports or even back-end protocols.  Ports and back-end proto-
+   cols are normally established in a bilateral agreement.  All opera-
+   tors are encouraged to use strong encryption for back-end traffic, no
+   matter if they offer IRC via TLS/SSL to end users.
 
 4. IANA Considerations
 
@@ -234,27 +211,17 @@ Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
 
    ircs-u  6697/tcp       Internet Relay Chat via TLS/SSL
 
-   Additionally, a clean-up of the current naming scheme will be
-   requested.  The author is trying to get into contact with the respec-
-   tive assignees.
-
-   ircs    994/tcp        Internet Relay Chat via TLS/SSL
-   ircs    994/udp        Internet Relay Chat via TLS/SSL
-
-   irc-u1  6665/tcp       Internet Relay Chat
-   irc-u2  6666/tcp       Internet Relay Chat
-   irc-u3  6667/tcp       Internet Relay Chat
-   irc-u4  6668/tcp       Internet Relay Chat
-   irc-u5  6669/tcp       Internet Relay Chat
-   irc-u1  6665/udp       Internet Relay Chat
-   irc-u2  6666/udp       Internet Relay Chat
-   irc-u3  6667/udp       Internet Relay Chat
-   irc-u4  6668/udp       Internet Relay Chat
-   irc-u5  6669/udp       Internet Relay Chat
-
 5. Informative References
 
    [IANALIST] http://www.iana.org/assignments/port-numbers , Sep 15,
+
+
+
+Hartmann                                                        [Page 4]
+
+Internet Draft      Default Port for IRC via TLS/SSL    January 22, 2014
+
+
               2010
 
    [TOP100] http://irc.netsplit.de/networks/top100.php , Sep 15, 2010
@@ -269,14 +236,6 @@ Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
    [RFC1459] J. Oikarinen, Internet Relay Chat Protocol
 
    [RFC2810] C. Kalt, Internet Relay Chat: Architecture
-
-
-
-
-Hartmann                                                        [Page 5]
-
-Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
-
 
    [RFC2811] C. Kalt, Internet Relay Chat: Channel Management
 
@@ -311,6 +270,14 @@ Authors' Address
 
    Richard Hartmann
    Munich
+
+
+
+Hartmann                                                        [Page 5]
+
+Internet Draft      Default Port for IRC via TLS/SSL    January 22, 2014
+
+
    Germany
    Email: richih.mailinglist@gmail.com
    http://richardhartmann.de
@@ -326,13 +293,6 @@ Version History
         added reference to [RFC1700]
 
    03 - removed reference to RFC 1700 as per RFC 3232
-
-
-
-Hartmann                                                        [Page 6]
-
-Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
-
 
    04 - added section "Technical Details"
         expanded section "Security Considerations"
@@ -350,7 +310,14 @@ Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
    06 - Introduced unique port keys
 
    07 - Extended document based on feedback by James Schaad and
-        Mykyta Yevstifeyev
+          Mykyta Yevstifeyev
+
+   08 - Removed naming updates to 6665-6669/TCP and 994/TCP (i.e. unique port keys)
+          at the request of Pearl Liang (IANA staff) and Nevil Brownlee (RFC Editor)
+
+   09 - New version as -08 is stuck in the submission queue
+
+   10 - Removed updates to RFCs 2812 and 2813, and to STARTTLS
 
 
 
@@ -362,28 +329,5 @@ Internet Draft      Default Port for IRC via TLS/SSL      April 23, 2011
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hartmann                                                        [Page 7]
+Hartmann                                                        [Page 6]
 
