@@ -1,0 +1,304 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<!-- base href="http://www.invlogic.com/irc/ctcp2_4.html" -->
+<title>Internet Relay Chat</title>
+<meta name="description" content="computer consulting services, internet and
+intranet desing, and custom software development">
+<meta name="keywords" content="computer, consulting, web, internet, intranet,
+WWW, world wide web, services, software, development, OS/2, Linux, Windows,
+hosting, virtual host, design, graphic, multimedia, Washington, Baltimore, Maryland,
+scanning, CD-Rom, computers, consultant, programming, scanner, IRC/2, Internet
+Relay Chat, IRC">
+</head>
+<body bgcolor="#FFFFFF">
+
+
+<h2>4. CTCP Requests and Replies</h2>
+
+<p>
+A list of standard defined CTCP requests and replies follows.  Some CTCP
+keywords are only valid as a request, while one (ERRMSG) is only valid as
+a reply.  This is noted where applicable.  The requests are listed as
+either "required" or "optional".  It should be noted that implementation
+of CTCP requests as a whole is optional.  However, if you choose to
+implement CTCP, you must implement all "required" requests in order to
+be compliant with the CTCP specification.
+
+</p><h3>4.1 VERSION (required)</h3>
+
+<p>
+Request: 'VERSION'<br>
+Reply: 'VERSION' SP user-text
+
+</p><p>
+This request will provide to the initiator information about the
+particular client is being used by the recipient.  A valid request will
+have no arguments accompanying it.
+
+</p><p>
+The user-text is extracted by concatenating all remaining parameters
+together, separated by spaces.  Thus a VERSION with the user-text of
+"ircIII it's great!" can be sent as a CTCP VERSION with three parameters:
+"ircIII", "it's", and "great!".  This behavior is intended to provide
+compatibility with older IRC clients.  While it is possible (and valid)
+to send a CTCP VERSION request with only one parameter, having all spaces
+quoted (according to section 3), clients are encouraged instead to send
+the user-text as multiple parameters with no quoted spaces, so that older
+clients can decode them.
+
+</p><p>
+It is not required that any useful information be encoded into a VERSION
+reply, or that a VERSION reply be machine-readable.  The VERSION reply
+is intended to be seen by humans.  Suggested information includes the
+IRC client's name and version, the operating system, and a contact address
+for the individual or organization responsible for the client.
+
+</p><p>
+Older IRC clients revealed information about obtaining a copy of the
+client via CTCP SOURCE.  We have chosen to deprecate SOURCE in favor of
+returning this information inside a VERSION reply.  Use of the "URL"
+attribute (see section 2.8) in a VERSION reply for revealing a site with
+more information about the IRC client is encouraged.
+
+</p><p>
+
+</p><h3>4.2  PING (required)</h3>
+
+<p>
+Request: "PING" SP arg<br>
+Reply: "PING" SP arg
+
+</p><p>
+This request is intended to determine the round trip time of a message
+from the initiator to the recipient and back to the initiator.  The
+recipient is required to return a duplicate of the received argument
+without modification.  Each client will define its own format for the
+argument.
+
+</p><p>
+An argument longer than 32 octets may be truncated by the recipient (to
+a minimum of 32 octects in length) before it is echoed back.
+
+</p><h3>4.3 CLIENTINFO (required)</h3>
+
+<p>
+Request: "CLIENTINFO"<br>
+Reply: "CLIENTINFO" *( SP keyword )
+
+</p><p>
+This request will be used to inquire of the capabilities of a client.
+The response will be a space-separated list of the valid request keywords
+recognised by this client.
+
+</p><p>
+The previous implementation of this command allowed for an argument which
+would provide additional information about the command, acting like a
+help reference.  In the interests of cutting down on the flood potential
+of clients, as well as the recent need to maintain local help files,
+this optional behavior is deprecated.
+
+</p><p>
+
+</p><h3>4.4 ACTION (required)</h3>
+
+<p>
+Request: "ACTION" SP user-text<br>
+There is no reply.
+
+</p><p>
+This request is used to provide an alternative form of speaking either
+to an individual or channel.  This text should be treated in a manner
+similar to a PRIVMSG from RFC 1459.  Alternate display methods are
+encouraged.
+
+</p><p>
+Note that the comment on user-text from VERSION (section 4.1 above) applies
+here also.
+
+</p><p>
+No reply is made to this request.
+
+</p><p>
+
+</p><h3>4.5 FINGER (optional)</h3>
+
+<p>
+Request: "FINGER"<br>
+Reply: "FINGER" SP user-text
+
+</p><p>
+The response to this request will be a user specified text string, and
+may contain any valid ASCII character 32 or above.  No restrictions are
+placed on the content of this reply.
+
+</p><p>
+The FINGER request is intended to include the deprecated USERINFO request
+in its domain.  A FINGER reply is generally expected to have some information
+about the user, although none is required.  There is no specified format
+for a FINGER response, so any client that attempts to automatically extract
+information such as idle time should prepare to be ocassionally disappointed.
+Inclusion of a homepage or web site using the "URL" attribute (see section
+2.8) is encouraged.
+
+</p><p>
+Note that the comment on user-text from VERSION (section 4.1 above) applies
+here also.
+
+</p><p>
+
+</p><h3>4.6 TIME (optional)</h3>
+
+<p>
+Request: "TIME"<br>
+Reply: "TIME" SP date-time
+
+</p><p>
+The response to this request will be the date and time of the system the
+client is running on.  The format of this reply must be that used be
+RFC822, section 5, with the following modification: the year must be
+a four-digit (not two-digit) number.  The time should be given in the
+local timezone, with the timezone given as an offset.
+
+</p><p>
+This modified format is listed in Appendix B for reference.  An example
+of a valid TIME reply is: "Wed, 11 Jun 1997 18:55 -0700".
+
+</p><p>
+The old format, which looked like "Wed Aug 20 23:29:21 1997", is now
+deprecated, but clients may want to recognize it for compatibility
+reasons.
+
+</p><p>
+Note that, as in VERSION (section 4.1 above), quoting the spaces is not
+recommended.
+
+</p><p>
+
+</p><h3>4.7 DCC (optional)</h3>
+
+<p>
+Request: "DCC" SP dcc-type SP dcc-protocol SP ip SP port *( SP dcc-arg )
+A reply may be sent if the request was a "firewall request" (see section
+5).
+
+</p><p>
+This implements the Direct Client to Client protocol.  The intent of
+this protocol is to facilitate the transfer of information from client
+to client, without directly accessing the IRC network.  An initial
+message is sent from the initiator to the recipient, where an IP and
+port are extracted from the message and a direct TCP connection is
+established.  The intent of the connection is indicated by the dcc-type
+field in the original message.
+
+</p><p>
+DCC requests are explained in section 5.
+
+</p><p>
+
+</p><h3>4.8 ERRMSG (optional)</h3>
+
+<p>
+This must not be sent as a request.<br>
+Reply: "ERRMSG" SP keyword *( SP user-text )
+
+</p><p>
+ERRMSG is used as a reply indicating that there was something wrong with
+a previous CTCP request.  Usually it should contain information about why
+the request failed, in a human-readable format.  Some CTCP requests
+(notably DCC) define some standard ERRMSG replies that may be used to
+indicate certain problems.
+
+</p><p>
+Note that the comment on user-text from VERSION (section 4.1 above) applies
+here also.
+
+</p><p>
+It is optional for an IRC client to send ERRMSG replies, though they are
+generally helpful to a user who receives them.
+
+</p><p>
+[still slightly controversial...]
+
+</p><p>
+
+</p><h3>4.9 PLAY (optional)</h3>
+
+<p>
+Request: "PLAY" SP filename SP mime-type<br>
+Reply: "PLAY" SP filename SP mime-type
+
+</p><p>
+A PLAY request is a request to display or launch some file previously sent
+via a DCC XFER or DCC OFFER.  The filename and mime-type must exactly match
+an existing downloaded file, and the file must have originally been sent
+with the "DO PLAYABLE" option (see section 5.1.2).  As with DCC XFER, the
+filename may need to be adjusted by the receiving client to avoid characters
+which are "special" to that client's operating system (such as directory
+dividers).
+
+</p><p>
+Clients should be careful when answering a PLAY request, and allow the user
+full control over whether a PLAY request is honored.  There is potential for
+abuse, so it is recommended that a client only honor PLAY requests for
+images, sounds, or videos.  Under no circumstances should a client PLAY any
+type of executable file.
+
+</p><p>
+If the receiving client does not have the file referenced by the PLAY
+request, it may send a PLAY reply back to the originator.  This reply may
+be used by the originator to initiate a DCC XFER of the file.  In this way,
+two clients may negotiate the launching of a file that has not been
+previously transferred.  This automatic transfer must never happen unless
+the user has indicated his/her consent to the client.  Unattended automatic
+file transfers are a possible security violation and should be handled with
+care.
+
+</p><p>
+
+</p><h3>4.10 Client Extensions</h3>
+
+<p>
+There is often reason for clients to implement extension CTCP commands
+which are not part of the document. To mark these as extensions, the
+author should prefix a command with "X-".  If the author is concerned
+about name collisions between differing implementations, he should
+prefix it further with some unique identifier, such as the client name,
+the script name, the author's nick, etc.
+
+</p><p>
+This document can't (and doesn't try to) forsee all the uses to which CTCP
+messages will be put.  Therefore, a subset of CTCP keywords are reserved
+for experimental or client-specific CTCP messages.  Following the lead of
+the MIME standard, CTCP keywords that start with "X-" are reserved for
+these messages.  For example, a client that wishes to implement an online
+paging system could use "X-PAGE".
+
+</p><p>
+If a client author is concerned about name collisions between differing
+implementations, he should prefix it further with some unique identifier,
+such as the client name, the script name, the author's nick, etc.  For
+example, "X-IRCII-PAGE".
+
+</p><p>
+A client can silently ignore any of these "extended" keywords which it
+does not understand.  All extensions to CTCP that are not listed in this
+document should be preceded with "X-" until they are added to the standard.
+
+</p><p>
+
+</p><h3>4.11 Deprecations</h3>
+
+<p>
+Currently there are clients which implement requests which are of no
+significant value in the face of these specificiations.  A client may
+respond to these deprecated requests, it may ignore them, or it may
+respond with an ERRMSG reply.  The list of deprecated requests is:
+ECHO, SED, USERINFO, UTC, ERRMSG (as a request), CLIENTINFO &lt;arg&gt;, SOURCE,
+and DCC SEND.
+</p><p>
+<font size="2">
+Maintained by: <a href="mailto:webmaster_at_invlogic.com">Webmaster, Innovative Logic Corp.</a>.<br>
+Last modified: 17-Sep-2004 01:04PM.<br>
+</font>
+
+</p></body></html>

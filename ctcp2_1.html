@@ -1,0 +1,143 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<!-- base href="http://www.invlogic.com/irc/ctcp2_1.html" -->
+<title>Internet Relay Chat</title>
+<meta name="description" content="computer consulting services, internet and
+intranet desing, and custom software development">
+<meta name="keywords" content="computer, consulting, web, internet, intranet,
+WWW, world wide web, services, software, development, OS/2, Linux, Windows,
+hosting, virtual host, design, graphic, multimedia, Washington, Baltimore, Maryland,
+scanning, CD-Rom, computers, consultant, programming, scanner, IRC/2, Internet
+Relay Chat, IRC">
+</head>
+<body bgcolor="#FFFFFF">
+
+
+<h2>TABLE OF CONTENTS</h2>
+
+<table>
+<tbody><tr><td>1.	</td><td colspan="3"><a href="http://www.invlogic.com/irc/ctcp2_1.html#INTRO">Introduction</a>
+</td></tr><tr><td></td><td>1.1	</td><td>Conventions
+</td></tr><tr><td></td><td>1.2	</td><td>Base Definitions
+</td></tr><tr><td>2.	</td><td colspan="3"><a href="http://www.invlogic.com/irc/ctcp2_2.html">Text Attributes</a>
+</td></tr><tr><td></td><td>2.1	</td><td>Bold
+</td></tr><tr><td></td><td>2.2	</td><td>Inverse (Reverse)
+</td></tr><tr><td></td><td>2.3	</td><td>Underline
+</td></tr><tr><td></td><td>2.4	</td><td>Overstrike
+</td></tr><tr><td></td><td>2.5	</td><td>Italics
+</td></tr><tr><td></td><td>2.6	</td><td>Colours
+</td></tr><tr><td></td><td>2.7	</td><td>Size
+</td></tr><tr><td></td><td>2.8	</td><td>Universal Resource Locator
+</td></tr><tr><td></td><td>2.9	</td><td>Character Spacing
+</td></tr><tr><td></td><td>2.10	</td><td>Encoding
+</td></tr><tr><td></td><td>2.11	</td><td>Normal
+</td></tr><tr><td></td><td>2.12	</td><td>Extensions
+</td></tr><tr><td></td><td>2.13	</td><td>Deprecations
+</td></tr><tr><td></td><td>2.14	</td><td>Examples
+</td></tr><tr><td>3.	</td><td colspan="3"><a href="http://www.invlogic.com/irc/ctcp2_3.html">Parsing CTCP Messages</a>
+</td></tr><tr><td></td><td>3.1	</td><td>Quoting
+</td></tr><tr><td></td><td>3.2	</td><td>"Flooding" Policy
+</td></tr><tr><td>4.	</td><td colspan="3"><a href="http://www.invlogic.com/irc/ctcp2_4.html">CTCP Requests and Replies</a>
+</td></tr><tr><td></td><td>4.1	</td><td>VERSION
+</td></tr><tr><td></td><td>4.2	</td><td>PING
+</td></tr><tr><td></td><td>4.3	</td><td>CLIENTINFO
+</td></tr><tr><td></td><td>4.4	</td><td>ACTION
+</td></tr><tr><td></td><td>4.5	</td><td>USERINFO
+</td></tr><tr><td></td><td>4.6	</td><td>TIME
+</td></tr><tr><td></td><td>4.7	</td><td>DCC
+</td></tr><tr><td></td><td>4.8	</td><td>ERRMSG
+</td></tr><tr><td></td><td>4.9	</td><td>PLAY
+</td></tr><tr><td></td><td>4.10	</td><td>Client Extensions
+</td></tr><tr><td></td><td>4.11	</td><td>Deprecations
+</td></tr><tr><td>5.	</td><td colspan="3"><a href="http://www.invlogic.com/irc/ctcp2_5.html">DCC Requests</a>
+</td></tr><tr><td></td><td>5.1	</td><td colspan="3">DCC Over Firewalls
+</td></tr><tr><td></td><td>5.3	</td><td colspan="3">MIME DCC Protocol
+</td></tr><tr><td></td><td></td><td>5.3.1 MIME DCC Negotiation
+</td></tr><tr><td></td><td></td><td>5.3.2 MIME DCC Data Transfer
+</td></tr></tbody></table>
+
+<p>
+
+</p><h2><a name="INTRO">1. Introduction</a></h2>
+
+<p>
+This document describes CTCP version 2 (CTCP2).
+
+</p><p>
+In order to facilitate the exchange of information with in the IRC
+networks, users have indicated desire to transmit files, determine
+transmission times and send specialized text messages.  As RFC 1459
+offers no direct means to exchange such requests, a protocol built upon
+RFC 1459's is required.  This protocol is known as CTCP (or Client
+To Client Protocol).
+
+</p><p>
+The original CTCP definition specified only request and reply messages,
+but allowed users to transfer files over IRC, measure lag (network delay),
+and retreive automated responses to queries about a user's IRC client or
+time zone.
+
+</p><p>
+Over the course of time, CTCP has been expanded by various sources, and
+what was once a "standard" has become increasingly less so.  This document
+is an attempt to clarify earlier CTCP documentation and standardize some of
+the new features that have become commonplace since then.  In addition,
+some new functionality has been added in anticipation of future clients,
+and the extensibility of CTCP has been greatly improved.
+
+</p><p>
+In a few cases, extensibility has been chosen over compatibility.  For
+that reason, CTCP2 is not completely compatible with the original CTCP.
+Clients that understand CTCP will not necessarily understand CTCP2.
+Clients that understand CTCP2 can be made compatible with the original
+CTCP, but this is not required.
+
+</p><p>
+
+</p><h3>1.1 Conventions</h3>
+
+<p>
+This document uses a mechanism known as "augmented Backus-Naur Form"
+(BNF) for most of its specifications.  A description of this augmented
+BNF can be found in RFC 2068 (HTTP/1.1) and RFC 822 (email) among many
+other places.  Please consult one of those RFCs for a full description.
+A few of the major elements this document uses are:
+
+</p><pre>"literal"
+   Anything in double quotes is a literal text string.  Unless stated
+   otherwise, it is case-insensitive.
+*rule
+   This indicates repitition, allowing 0 or more occurances of this
+   element.  A common derivitive is "1*rule" which specifies 1 or
+   more occurances.
+[rule]
+   Square brackets indicate an optional element or elements.
+</pre>
+
+<p>
+Unless stated otherwise, there are is no implied whitespace.  Areas
+where whitespace is allowed will be clearly marked.
+
+</p><p>
+
+</p><h3>1.2 Base Definitions</h3>
+
+<p>
+These are standard definitions that will show up throughout the document.
+
+</p><pre>OCTET	= &lt;any 8-bit sequence of data&gt;
+ALPHA	= &lt;any US-ASCII uppercase or lowercase letter&gt;
+DIGIT	= &lt;any US-ASCII digit "0".."9"&gt;
+NUL	= &lt;US-ASCII character 0 (octal 000)&gt;
+LF	= &lt;US-ASCII character 10 (octal 012)&gt;
+CR	= &lt;US-ASCII character 13 (octal 015)&gt;
+SP	= &lt;US-ASCII character 32 (octal 040)&gt;
+</pre>
+
+<p>
+<font size="2">
+Maintained by: <a href="mailto:webmaster_at_invlogic.com">Webmaster, Innovative Logic Corp.</a>.<br>
+Last modified: 17-Sep-2004 01:04PM.<br>
+</font>
+
+</p></body></html>

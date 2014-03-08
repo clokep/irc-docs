@@ -1,0 +1,188 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<!-- base href="http://www.invlogic.com/irc/ctcp2_A.html" -->
+<title>Internet Relay Chat</title>
+<meta name="description" content="computer consulting services, internet and
+intranet desing, and custom software development">
+<meta name="keywords" content="computer, consulting, web, internet, intranet,
+WWW, world wide web, services, software, development, OS/2, Linux, Windows,
+hosting, virtual host, design, graphic, multimedia, Washington, Baltimore, Maryland,
+scanning, CD-Rom, computers, consultant, programming, scanner, IRC/2, Internet
+Relay Chat, IRC">
+</head>
+<body bgcolor="#FFFFFF">
+
+
+<h3>Appendix A. Indexed Color Values</h3>
+
+<table>
+<tbody><tr align="LEFT"><th>Index   </th><th>Name            </th><th>RGB
+</th></tr><tr><td>0       </td><td>Black           </td><td>000000
+</td></tr><tr><td>1       </td><td>Blue            </td><td>000080
+</td></tr><tr><td>2       </td><td>Green           </td><td>008000
+</td></tr><tr><td>3       </td><td>Cyan            </td><td>008080
+</td></tr><tr><td>4       </td><td>Red             </td><td>800000
+</td></tr><tr><td>5       </td><td>Purple          </td><td>800080
+</td></tr><tr><td>6       </td><td>Brown           </td><td>808000
+</td></tr><tr><td>7       </td><td>Light Gray      </td><td>C0C0C0
+</td></tr><tr><td>8       </td><td>Gray            </td><td>808080
+</td></tr><tr><td>9       </td><td>Light Blue      </td><td>0000FF
+</td></tr><tr><td>A       </td><td>Light Green     </td><td>00FF00
+</td></tr><tr><td>B       </td><td>Light Cyan      </td><td>00FFFF
+</td></tr><tr><td>C       </td><td>Light Red       </td><td>FF0000
+</td></tr><tr><td>D       </td><td>Light Magenta   </td><td>FF00FF
+</td></tr><tr><td>E       </td><td>Yellow          </td><td>FFFF00
+</td></tr><tr><td>F       </td><td>White           </td><td>FFFFFF
+</td></tr></tbody></table>
+
+<p>
+
+</p><h3>Appendix B. RFC 822.5 Date/Time Format (Modified)</h3>
+<pre>date-time   =  [ day "," ] date time        ; dd mm yy
+                                            ;  hh:mm:ss zzz
+day         =  "Mon"  / "Tue" /  "Wed"  / "Thu"
+            /  "Fri"  / "Sat" /  "Sun"
+date        =  1*2DIGIT month 4DIGIT        ; day month year
+                                            ;  e.g. 20 Jun 1982
+month       =  "Jan"  /  "Feb" /  "Mar"  /  "Apr"
+            /  "May"  /  "Jun" /  "Jul"  /  "Aug"
+            /  "Sep"  /  "Oct" /  "Nov"  /  "Dec"
+time        =  hour zone                    ; ANSI and Military
+hour        =  2DIGIT ":" 2DIGIT [":" 2DIGIT]
+                                            ; 00:00:00 - 23:59:59
+zone        =  ( ("+" / "-") 4DIGIT )       ; Local differential
+                                            ;  hours+min. (HHMM)
+Example: "Wed, 11 Jun 1997 18:55 -0700"
+</pre>
+
+<p>
+
+</p><h3>Appendix C. MIME DCC Negotiation Parameters</h3>
+
+<pre>OPTION-QUERY	= QUERY OPTION PARAM-LEN PARAM-LEN(octet)
+QUERY		= DO | DON'T | WILL | WON'T
+DON'T		= &lt;octet 254 (octal 0376)&gt;
+DO		= &lt;octet 253 (octal 0375)&gt;
+WON'T		= &lt;octet 252 (octal 0374)&gt;
+WILL		= &lt;octet 251 (octal 0373)&gt;
+OPTION		= octet
+PARAM-LEN	= octet
+Option queries are given in hexidecimal.  Queries F0 through FE are reserved.
+Query FF is a special query indicating the end of the option query phase.
+Queries C0 through EF are reserved for private use by individual clients.
+</pre>
+
+<table>
+<tbody><tr><th>QUERY   </th><th>NAME/DESCRIPTION
+</th></tr><tr valign="TOP"><td>00      </td><td>RESUME<br>
+	A "WILL RESUME" request indicates that this file is a static file
+	that can be resumed later if the transfer doesn't complete.  If a
+	client would like to resume a previously disconnected transfer,
+	it should send "DO RESUME" -- otherwise it should reply with
+	"DON'T RESUME".  There is one 4-byte parameter to a "WILL RESUME"
+	request: the timestamp of the file, in network byte order, measured
+	in standard epoch seconds (the number of seconds that have passed
+	since midnight on 1 January 1970, GMT).  This may be used by the
+	recipient client to assure that the file has not been modified
+	since the disconnected transfer.  There is also one 4-byte parameter
+	to a "DO RESUME" request: the offset, in network byte order, that
+	the transfer should be resumed from.  This offset is measured in
+	bytes from the beginning of the file -- hence, a value of "0"
+	indicates that the client wishes to receive the file from the
+	beginning.<br>
+	Parameters: (request:) 4-byte timestamp (reply:) 4-byte offset<br>
+	Example: (request:) FB 00 04 33 CD 53 16<br>
+		 (reply:) FD 00 04 00 00 04 00
+</td></tr><tr valign="TOP"><td>01      </td><td>PLAYABLE<br>
+        A "DO PLAYABLE" request indicates that this file is intended to be
+        triggered by a CTCP PLAY request later.  Clients should only activate
+        files sent with "DO PLAYABLE" when honoring a CTCP PLAY request.
+        The reply to the "DO PLAYABLE" request (WILL/WON'T) may be ignored.
+        A client should reply "WILL" if it supports CTCP PLAY and intends
+        to honor a future CTCP PLAY request for this file.  It should reply
+        "WON'T" if it doesn't support CTCP PLAY and/or doesn't intent to
+	honor future CTCP PLAY requests for this file.<br>
+	Parameters: none.<br>
+	Example: FD 01 00
+</td></tr><tr valign="TOP"><td>02      </td><td>PLAY-NOW<br>
+        A "DO PLAY-NOW" request indicates that this file should be "played"
+        after the file tranmission is complete.  The definition of "play"
+        will vary according to the file type, but should match the behavior
+        of a CTCP PLAY request.  A client may request "DO PLAY-NOW" without
+        "DO PLAYABLE" -- this means the client would like the file to be
+        activated upon receipt, and that no future CTCP PLAY request will be
+        made for this file.  The reply to the "DO PLAY-NOW" request may be
+        ignored.  A client should reply "WILL" if it intends to activate
+        the file after transmission is complete, and "WON'T" if it doesn't.<br>
+	Parameters: none.<br>
+	Example: FD 02 00
+</td></tr><tr valign="TOP"><td>10	</td><td>ENCRYPT<br>
+	"WILL ENCRYPT" is a request to negotiate encryption protocols.  Only
+	the initiating client may send a "WILL ENCRYPT" request.  The
+	recipient client may choose one encryption method and respond with
+	"DO ENCRYPT", or may refuse encryption and respond with "DON'T
+	ENCRYPT".  The parameters to a "WILL ENCRYPT" request should be a
+	series of one-byte codes representing encryption methods.  There
+	must be one parameter to a "DO ENCRYPT" request: the encryption
+	method chosen.  If the clients agree to encrypt the session, the
+	encryption begins after option negotiation is completed.<br>
+	Parameters: encryption methods (one byte each).<br>
+	Example: (request:) FB 10 02 00 01 (reply:) FD 10 01 01
+</td></tr></tbody></table>
+
+<p>
+
+</p><h3>Appendix D. Encryption Methods</h3>
+
+<p>
+[this is under discussion]
+
+</p><pre>00	some blowfish or DES symmetric key protocol?  volunteers? :)
+01	SSL? :)
+02	others?  are there any?
+F0-FF reserved for private testing use?
+register others with us?
+[very much undefined at this time]
+</pre>
+
+<p>
+
+</p><h3>Appendix E. BNF for Embedding CTCP on IRC</h3>
+
+<pre>CTCP-MARKER	= &lt;US-ASCII character 1 (octal 001)&gt;
+CTCP-PERMITTED	= &lt;any octet except NUL, CTCP-MARKER, LF, CR and SP&gt;
+CTCP-TAG	= 1*CTCP-PERMITTED
+CTCP-MESSAGE	= CTCP-MARKER CTCP-TAG *( SP CTCP-TAG ) CTCP-MARKER
+IRC-TEXT	= *( CTCP-PERMITTED | SP )
+IRC-MESSAGE	= *( CTCP-MESSAGE | IRC-TEXT )
+</pre>
+
+<p>
+
+</p><h3>Appendix F. BNF for CTCP Request Parameters</h3>
+
+<pre>keyword		= CTCP-TAG
+arg		= CTCP-TAG
+user-text	= *( CTCP-TAG [SP] )
+ip		= ( ip4dcc | ip4dotted | ip6 )
+ip4dcc		= &lt;a 32-bit number representing an IPv4 address&gt;
+					; the use of a 32-bit number as an
+					; IPv4 address is discouraged, and
+					; is included only for backward
+					; compatibility
+ip4dotted	= &lt;a standard dotted IPv4 address: d.d.d.d&gt;
+					; example: "192.168.0.5"
+ip6		= &lt;any valid IPv6 hex notation, as listed in RFC 1884.2&gt;
+					; example: "::FFFF:C0:A8:00:05"
+port		= 4*5DIGIT		; in the range 1024 - 65535
+dcc-arg		= CTCP-TAG
+url		= &lt;any valid URL as specified by the HTTP protocol&gt;
+</pre>
+
+<p>
+<font size="2">
+Maintained by: <a href="mailto:webmaster_at_invlogic.com">Webmaster, Innovative Logic Corp.</a>.<br>
+Last modified: 17-Sep-2004 01:04PM.<br>
+</font>
+
+</p></body></html>

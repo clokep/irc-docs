@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+   <link rel="shortcut icon" href="http://www.visualirc.net/favicon.ico" type="image/x-icon">
+   <title>Visual IRC 2 - Turbo DCC Specification</title>
+</head>
+<body>
+<div align="center"><table bgcolor="#CCCCCC" width="95%">
+  <tbody><tr>
+    <td width="150"></td>
+    <td><font size="+2">Turbo DCC Specification</font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF" valign="top" width="150"><font face="Verdana" size="-3">
+    <a href="http://www.visualirc.net/">Visual IRC</a><br>
+    <b>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/features.php">Features &amp; Screenshots</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/download.php">Download ViRC!</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/scripts/">Scripts</a><br>
+    <br>
+    &nbsp; &nbsp;<a href="http://groups.google.com/group/virc">Visual IRC Forum</a><br>
+    &nbsp; &nbsp;<a href="irc://us.undernet.org/virc">Chat in Undernet #ViRC</a><br>
+    </b>
+    <br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/awards.php">Awards and Reviews</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/author.php">About the Author</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/tech.php">About the Technology</a>
+    <hr noshade="noshade" size="1" width="100%">
+    <a href="http://www.visualirc.net/old/">ViRC Antique Shop</a><br>
+    <hr noshade="noshade" size="1" width="100%">
+    </font></td>
+
+    <td bgcolor="#FFFFFF">
+  
+<h2>CTCP Handshake</h2>
+
+<dl>
+<dt>Old handshake
+</dt><dd><tt>DCC TSEND <i>filename</i> <i>encoded-ip</i> <i>port</i> <i>size</i></tt>
+</dd><dt>New handshake
+</dt><dd><tt>DCC SEND <i>filename</i> <i>encoded-ip</i> <i>port</i> <i>size</i> T</tt>
+</dd></dl>
+
+<ul>
+<li><b>filename</b> - The name (without path) of the file being sent. The
+filename may contain spaces if it's surrounded by double quote marks
+("file with spaces.txt").
+</li><li><b>encoded-ip</b> - The sender's IPv4 address, expressed as a single
+number. The number is obtained by interpreting the 32-bit IP address as an
+unsigned integer in network byte order (most significant byte first).
+</li><li><b>port</b> - The port on which the sender is listening for a TDCC
+connection.
+</li><li><b>size</b> - The size of the file in bytes.
+</li></ul>
+
+<p>Any further handshaking for DCC Resume takes place just as in regular
+DCC.</p>
+
+<h2>Sending</h2>
+
+<p>The sender waits for the receiver to connect to the advertised port. Once
+a connection is made, the sender immediately begins sending the file, with
+no pauses or interruptions. (If a DCC Resume has been negotiated, the file
+will be sent starting at the negotiated offset; otherwise, it is sent from
+the beginning.) When the entire file has been sent, the sender waits for the
+receiver to close the socket.</p>
+
+<h2>Receiving</h2>
+
+<p>The receiver connects to the sender's advertised IP address and port. Once
+the connection is made, the receiver begins reading data as fast as possible
+from the socket and writing it to a local file, with no pauses or
+interruptions. When the entire file has been received (as determined by the
+advertised file size), the receiver closes the socket.</p>
+
+<h2>Changes for Reverse TDCC</h2>
+
+<p>Reverse TDCC uses a different handshake:</p>
+
+<blockquote>
+<tt>DCC SEND <i>filename</i> <i>encoded-ip</i> 0 <i>size</i> <i>token</i></tt>
+</blockquote>
+
+<p>... where <i>token</i> is a non-negative integer followed by the letter
+<tt>T</tt>. The integer must be unique for each file being sent by the same
+client at any given time. (The same token is included at the end of any DCC
+RESUME or DCC ACCEPT messages dealing with this connection.)</p>
+
+<p>Notice the port is 0; this signals to the receiver that the sender is
+requesting Reverse (T)DCC. The receiver opens a connection on a port of its
+choice and responds with a similar handshake:</p>
+
+<blockquote>
+<tt>DCC SEND <i>filename</i> <i>encoded-ip</i> <i>port</i> <i>size</i> <i>token</i></tt>
+</blockquote>
+
+<p>This message is sent as a CTCP request, not a CTCP reply, as if the
+receiver is attempting to send this file to the sender! (This may require
+the sender to add the receiver to his "DCC Allow" list on some networks.)
+The message can be identified as the second half of a Reverse DCC
+transaction because the token is present and the port is nonzero.</p>
+
+<p>In this second handshake, <i>encoded-ip</i> and <i>port</i> refer to the
+IP address and port being used by the <b>receiver</b>, since the receiver
+opens the connection in Reverse DCC. The sender connects to that port, and
+as soon as the connection is made, the file transfer takes place as usual.
+The sender still waits for the receiver to close the socket when the file is
+finished.</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="left"><font size="-3">© Jesse McGrew 2001-2007</font></td>
+  </tr>
+</tbody></table></div>
+
+
+  </body></html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Color FAQ</title>
+	<link rel="stylesheet" href="colorfaq_files/ircle.css" type="text/css">
+</head>
+<body>
+<center><img src="colorfaq_files/ircle.gif"></center>
+<br>
+We often receive emails/irc messages about colors and color problems. 
+Here are some Frequently Asked Questions with their answers.<br>
+<br>
+<b>Q: Does ircle support colored messages?</b><br>
+A: Yes, with the color popup menu in the input line users can add a color to their text.<br><br>
+
+<b>Q: Since when is this possible?</b><br>
+A: Ircle has had the color capability since version 2.5, released in May
+ 1996. Ircle 2.5 did not have a color popup menu so color codes had to 
+be entered manually. With the popup menu in ircle 3.0 one has an easy 
+way to write colored text.<br>
+<br>
+
+<b>Q: So how does it actually work?</b><br>
+A: After you press return ircle checks if the text you entered has 
+colors. It will then encode that line into something that can be 
+transferred through IRC servers. Specifically it will insert control-C 
+characters plus one other character for every color you used. Basically 
+users do not have to remember codes or something to write colored 
+messages.<br>
+<br>
+Example: you typed: <font face="Courier">Hello</font>, did a Select All from the Edit menu, and selected the color red in the color popup menu. You then get this:
+<font color="#FF0000" face="Courier">Hello</font><br>
+<br>
+ircle will encode that to: <font face="Courier">control-C 2 H e l l o</font><br>
+<br>
+(control-C is US-ASCII code 3, a non printable character)<br>
+<br>
+The ircle client that receives this line notices that the line contains a
+ control-C and then reads the next character which should be the color 
+number, in this case a '2'. Any text after that is considered for human 
+use again; it will be displayed in color 2 which is red. Easy and 
+straightforward.<br>
+<br>
+
+<b>Q: Are there other special invisible characters?</b><br>
+A: Yes, for instance Control-B, for bold text, and Control-A for CTCP messages, but that is beyond the scope of this document.<br>
+<br>
+
+<b>Q: How many colors can ircle make, and what are their codes?</b><br>
+A: The 'Ctrl-C plus one other character' scheme theoretically allows for
+ over 200 different colors. Currently ircle uses 28 static colors and 14
+ dynamic colors. The static colors appear the same in all ircle clients.
+ The dynamic ones are set by the user in the Color Prefs, and used 
+internally in ircle and by some scripts to display dcc requests, private
+ messages, notices etc. correctly.<br>
+<br>
+The ircle color range:<img src="colorfaq_files/irclecolors.gif" align="MIDDLE"><br>
+<br>
+Complete color list:
+<pre>color ascii color       RGB values           HTML
+char  code  name        red    green  blue   color code
+-------------------------------------------------------
+0     48    white       65535  65536  65535  FFFFFF
+1     49    black           0      0      0  000000
+
+2     50    red         65535      0      0  FF0000
+3     51    orange      65535  32768      0  FF8000
+4     52    yellow      65535  65535      0  FFFF00
+5     53    lt green    32768  65535      0  80FF00
+6     54    green           0  65535      0  00FF00
+7     55    blue green      0  65535  32768  00FF80
+8     56    cyan            0  65535  65535  00FFFF
+9     57    lt blue         0  32768  65535  0080FF
+:     58    blue            0      0  65535  0000FF
+;     59    purple      32768      0  65535  8000FF
+&lt;     60    magenta     65535      0  65535  FF00FF
+=     61    purple red  65535      0  32768  FF0080
+
+&gt;     62    lt gray     49152  49152  49152  C0C0C0
+?     63    dk gray     16384  16384  16384  404040
+
+@     64    -           32768      0      0  800000
+A     65    |           32768  16384      0  804000
+B     66    |           32768  32768      0  808000
+C     67    | darker    16384  32768      0  408000
+D     68    | versions      0  32768      0  008000
+E     69    | of            0  32768  16384  008040
+F     70    | colors        0  32768  32768  008080
+G     71    | 50..61        0  16384  32768  004080
+H     72    |               0      0  32768  000080
+I     73    |           16384      0  32768  400080
+J     74    |           32768      0  32768  800080
+K     75    -           32768      0  16384  800040
+
+
+User defined colors:
+
+color ascii color
+char  code  name
+-------------------------------------------------------
+a     97    server message
+b     98    standard message
+c     99    private message
+d     100   notify
+e     101   dcc/ctcp
+f     102   window background
+g     103   your own message
+h     104   notice
+i     105   user highlight
+j     106   reserved
+k     107   reserved
+l     108   userlist chanop
+m     109   userlist ircop
+n     110   userlist voice
+</pre>
+<br>
+
+<b>Q: What limitations are there with this color scheme?</b><br>
+A: It does not provide for background colors. As background colors 
+cannot be set for individual characters with standard Macintosh toolbox 
+calls, ircles color protocol design did not provide a method to set 
+them.<br>
+<br>
+
+<b>Q: Why did you design it this way?</b><br>
+A: First of all, there was no standard for use of colors on IRC. 
+RFC1459, the document that describes the IRC protocol, does not mention 
+colors, so I had to come up with something myself.<br>
+<br>
+IMHO there were (and are) several restrictions to consider when designing a new color protocol:<br>
+<br>
+1: It must not break other clients or interfere with other protocols.<br>
+2: It must allow easy filtering for those who do not want to see colors.<br>
+3: It must use as few characters as possible, because the maximum length
+ of an IRC line is 512 characters. (The more characters the color 
+protocol uses, the less space is left for the actual message)<br>
+4: It must be clear and straightforward and must not allow any room for ambiguous interpretation.<br>
+<br>
+I believe all objectives are met with ircles design.<br>
+<br>
+
+<b>Q: It seems to me that other IRC clients use other ways to encode color messages, am I right?</b><br>
+A: Correct, more coloring methods have appeared in recent years. mIRC, 
+the most popular IRC app for Windows, has its own 'protocol' for 
+instance. It is incompatible with ircles protocol, and the use of these 2
+ coloring methods on one IRC channel can result in text displayed in the
+ wrong color or text with seemingly random extra characters. This 
+happens on both Mac and Windows or any other client that supports one of
+ both color encoding methods. <br>
+<br>
+
+<b>Q: Why are there more protocols then, isn't it in the interest of all IRC users to have just one?</b><br>
+A:  Indeed it is. I have done a lot in the last years to prevent the double standard situation from happening. A bit of history:<br>
+<br>
+May 96: ircle 2.5 starts using colors.<br>
+<br>
+Nov 96: One of mIRCs betatesters/designers emails me to tell that mIRC 
+is going to use colors too, and asks me the color protocol details that 
+ircle uses. I reply with every information there is to give.<br>
+Some time later mIRC version 4.7 is released with an incompatible color method.<br>
+<br>
+End of 96: On IRC I talk to Bert Weisse, the author of mIRCs competitor 
+Pirch. We discuss technical details on how to make Pirch and ircle video
+ streams work together. In the same discussion he mentions that he will 
+implement colors too in Pirch but doesn't know what to choose. He is 
+inclined to use ircles method as he sees flaws in mIRCs design, and I 
+agree with him. Later on a Pirch version is released using mIRCs method.
+ Bert apologizes to me saying that he wished he didnt have to do this 
+but that he can't ignore the marketleader and main competitor.<br>
+<br>
+Jan 97: A mailing list is formed with just about all authors of IRC 
+clients joining. Purpose is to set new standards for CTCP but soon 
+colors become a subject. Every client author who designed a color 
+protocol, including me, posts its specs to the list for others to 
+review. mIRCs design gets a lot of criticism, and I decide that while 
+the discussion continues I change nothing about the colors, hoping a new
+ standard will emerge.<br>
+<br>
+Jan 98: The client author mailing list falls apart, without reaching an agreement on anything. :(<br>
+<br>
+1995-Feb 99: Regular phone calls with Tjerk Vonck, main betatester of 
+mIRC, exchanging technical stuff to make  ircle and mIRC compatible with
+ things like CTCP sound, DCC etc. all for the benefit of the users. The 
+color problems are discussed too of course. In a very pleasant meeting 
+in person with Tjerk in Feb 99, we agreed to exchange some technical 
+docs by email, one of which is my suggestion for a new color protocol 
+which he will discuss with Khaled. I submitted my part of the deal, but i
+ get nothing back. A reminder goes unanswered. A second reminder sent to
+ both Khaled and Tjerk on Jun 24 1999 has not yet been answered.<br>
+<br>
+
+<b>Q: Why don't you just implement mIRCs protocol and make everyone happy?</b><br>
+A: I would be happy if i could, but it cannot be done reliably.<br>
+<br>
+
+<b>Q: What do you mean 'not reliably'? Many other IRC clients have done it, including mIRC of course?</b><br>
+A: That seems so yes, but fact is that because of mIRCs design a program
+ needs to do -guessing- to interpret a colored IRC message. Moreover 
+mIRC does not stick to its own protocol specification when sending a 
+colored message. Guessing is not a good way (to say the least) in 
+programming protocols. That is not the standard I use when writing 
+software.<br>
+<br>
+
+<b>Q: I don't understand, can you elaborate?</b><br>
+A: To understand what the problem really is I'll explain how mIRC handles color. Full details are available on the mIRC site at <a href="http://www.mirc.co.uk/help/color.txt">http://www.mirc.co.uk/help/color.txt</a><br>
+<br>
+The mIRC color range:<img src="colorfaq_files/mirccolors.gif" align="MIDDLE"><br>
+<br>
+I quote from above mentioned text:<br>
+<br>
+"The syntax of the color attribute in text has the format  ^CN[,M]  
+to start colored text."<br>
+...<br>
+"N and M can be any number out of a range {0,1,..,15} thus pointing to a
+ range of sixteen colors. N will be the text (foreground) color, M a 
+background color. A background color (M) is not always included. If no 
+background color is set the recieving client uses his default background
+ color (white)."<br>
+<br>
+This basically means that a color command can be anything from the following:
+<pre>Cltr-C N  (2 bytes)
+Ctrl-C NN (3 bytes)
+Ctrl-C NN,M {5 bytes}
+Ctrl-C NN,MM (6 bytes)
+</pre>
+
+This looks like a variable length protocol, so you'd expect some 
+explicit information in the color command itself so that the receiver 
+knows where the last character is, quod non.<br>
+<br>
+I quote from an email on the client coders mailing list, directed to the mIRC people, to make my point:<br>
+<pre>"Date: Thu, 16 Jan 1997 14:26:29 GMT
+Reply-To: ctcp%catless@newcastle.ac.uk
+Originator: ctcp@catless.ncl.ac.uk
+Sender: ctcp%catless@newcastle.ac.uk
+Precedence: bulk
+From: Mike McLagan <mmclagan@*****>
+To: onno@macresponse.nl
+Subject: mIRC ^C design flaws
+...
+
+   Thru this study, I came up with several examples where you obviously didn't
+think thru the implications of what you were doing, and as a result churning out
+what can only be classified as sloppy programming.  In the interests of making
+short work of this, I will present one example to the members of this list,
+although my impression is most have thought this thru.
+
+   "I am really upset at my brother for WASTING 15,000 sheets of paper!"
+
+   "I am ^C4,7really upset^C at my brother for ^C0,1WASTING ^C15,000 sheets 
+    of paper!"
+
+^C can both initiate a colour change and end it.  Colours are specified by
+^C followed by one or 2 comma seperated values.  What I want to know, as the
+client coder who receives the above message, is am I supposed to render:
+
+   "I am 'really upset' at my brother for 'WASTING '15,000 sheets of paper!"
+         ^^ 4 on 7   ^^                   ^^ 0 on 1^
+
+   "I am 'really upset' at my brother for 'WASTING ''00 sheets of paper!'"
+         ^^ 4 on 7   ^^                   ^ 0 on 1^ ^^ 15 on 0          ^
+
+If you have some magical means to differentiate what the user wants from the
+above example, I would be most appreciative to receive this information so
+I can apply it within my code, allowing my users to deal with this onslaught
+of arbitrary and poorly defined noise that has been foisted on them."
+</mmclagan@*****></pre>
+
+This guesswork is exactly my objection against the mIRC protocol. The 
+problem has been acknowledged by the mIRC people too. color.txt mentions
+ the following 'solution':<br>
+
+<pre>"! Note that if you want to give color to NUMBERS this syntax could mess up
+  if used improperly :-)  Still this syntax is chosen for the sake of 
+  symplicity. "
+</pre>
+simplicity? Am i supposed to laugh or cry now?<br>
+<pre>" If you use color numbers 01,02,03,...09 instead of 1,2,3,...9 
+  all possible problems with giving color to numbers are prevented! This 
+  just takes a little dicipline from the users. Thus use ^C0,01123^C to 
+  display the text 123 in white on a black background and not ^C0,1123^C 
+  which would result in the text 23 in white on lightcyan.
+  In all your text handling aliases/scripts the use of double digit color 
+  codes is suggested!"
+</pre>
+<br>
+I read this as: Ok, we made a mistake with our first design, now use our
+ recommended protocol, thus Ctrl-C NN[,MM]. This is exactly what ircle 
+3.0 can read. It can interpret messages in that format as good as it 
+goes when 'mIRC' is selected in the Color prefs. Too bad users are still
+ allowed to send out old color protocol stuff... Note: the v2 style mIRC
+ protocol will too have problems with colored words that happen to start
+ with a ',' although that is rare.<br>
+<br>
+
+<b>Q: Does Khaled, the author of mIRC, know about the apparent flaws in his design?</b><br>
+A: He certainly does. It has been extensively discussed on the IRC 
+authors mailing list, which he joined too. I have put it forward a lot 
+of times to him, directly or indirectly. Its has been acknowledged by 
+Tjerk Vonck, mIRCs main betastester. But nothing is being done about it.
+ Need i say more?<br>
+<br>
+<b>Q: Are you frustrated with all this or what?</b><br>
+A: No, just disappointed that some people do not take their 
+responsibility. Nobody is perfect, and if something doesn't work and can
+ be fixed, it should be done. Note this could have been fixed 3 years 
+ago, a decade in computing terms.<br>
+<br>
+<b>Q: What exactly are you proposing?</b><br>
+A: I'd like a new color protocol that meets the objectives laid out 
+above and allows for foreground and background colors. The number of 
+colors and their values is not a major issue for now. The best thing 
+would be to make it a RFC, an internet standard like RFC1459, the IRC 
+protocol, is.<br>
+<br>
+One -could- do the following:<br>
+<pre>fixed length:
+
+ctrl-C N  to set foreground color. (N is one byte)
+ctrl-D N  to set background color. (N is one byte)
+ctrl-E NM to set both fore and background in one command. (always 2 bytes after ctrl-C)
+
+or:
+
+ctrl-C N where the value of N determines if a foreground or background color is meant.
+
+or:
+
+ctrl-C NM to set fore and background color. (so always 2 bytes after the ctrl-C).
+
+or (variable length, requiring stop character)
+
+ctrl-C N[N] ctrl-c to set both fore and background. when 2 color codes are used the second one is the background color
+</pre>
+<br>
+
+
+
+
+
+
+<div class="ads">
+<center>
+<script src="colorfaq_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript"><!--
+google_ad_client = "pub-2076958108756429";
+/* 728x90, gemaakt 26-8-09 */
+google_ad_slot = "9137059986";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="colorfaq_files/show_ads.js">
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16882666-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</center>
+</div>
+<div class="copyright">
+© copyright 1995-2010 Onno Tijdgat, all rights reserved - 
+Comments on this site? Contact the <a href="http://www.ircle.com/contact.html">Webmaster</a>.<br>
+This site was last updated on Sept 4, 2010.<br>
+</div>
+
+
+</body></html>

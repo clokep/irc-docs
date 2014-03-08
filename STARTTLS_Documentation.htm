@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+		<meta name="verify-v1" content="AC0gWHwIlsC4LygCC3vOXihwXCtzUb7lUwYkxSscPG8=">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="page-enter" content="blendTrans(Duration=0.4)">
+		<meta http-equiv="page-exit" content="blendTrans(Duration=0.4)">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="generator" content="MediaWiki 1.15alpha">
+		<meta name="keywords" content="STARTTLS Documentation,Modules/cap,Modules/ssl gnutls">
+		<link rel="shortcut icon" href="http://wiki.inspircd.org/favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.inspircd.org/opensearch_desc.php" title="Inspire IRCd (InspIRCd) (en)">
+		<link title="Creative Commons" type="application/rdf+xml" href="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;action=creativecommons" rel="meta">
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+		<link rel="alternate" type="application/rss+xml" title="Inspire IRCd (InspIRCd) RSS Feed" href="http://wiki.inspircd.org/index.php?title=Special:RecentChanges&amp;feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="Inspire IRCd (InspIRCd) Atom Feed" href="http://wiki.inspircd.org/index.php?title=Special:RecentChanges&amp;feed=atom">
+		<title>STARTTLS Documentation - Inspire IRCd (InspIRCd)</title>
+		<link rel="stylesheet" href="STARTTLS_Documentation_files/shared.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="STARTTLS_Documentation_files/commonPrint.css" type="text/css" media="print">
+		<link rel="stylesheet" href="STARTTLS_Documentation_files/main.css" type="text/css" media="screen">
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins/monobook/IE50Fixes.css?198" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins/monobook/IE55Fixes.css?198" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins/monobook/IE60Fixes.css?198" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins/monobook/IE70Fixes.css?198" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="STARTTLS_Documentation_files/index.css" type="text/css">
+		<link rel="stylesheet" href="STARTTLS_Documentation_files/index_003.css" type="text/css" media="print">
+		<link rel="stylesheet" href="STARTTLS_Documentation_files/index_004.css" type="text/css">
+		<link rel="stylesheet" href="STARTTLS_Documentation_files/index_002.css" type="text/css">
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins/common/IEFixes.js?198"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins";
+		var wgArticlePath = "/$1";
+		var wgScriptPath = "";
+		var wgScript = "/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://wiki.inspircd.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "STARTTLS_Documentation";
+		var wgTitle = "STARTTLS Documentation";
+		var wgAction = "view";
+		var wgArticleId = "2763";
+		var wgIsArticle = true;
+		var wgUserName = null;
+		var wgUserGroups = null;
+		var wgUserLanguage = "en";
+		var wgContentLanguage = "en";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = "12463";
+		var wgVersion = "1.15alpha";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = ["", ""];
+		var wgDigitTransformTable = ["", ""];
+		var wgRestrictionEdit = ["sysop"];
+		var wgRestrictionMove = ["sysop"];
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="STARTTLS_Documentation_files/wikibits.js"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="STARTTLS_Documentation_files/ajax.js"></script>
+		<script type="text/javascript" src="STARTTLS_Documentation_files/index.php"><!-- site js --></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-STARTTLS_Documentation skin-monobook">
+
+
+<table cellpadding="0" cellspacing="0" width="100%">
+ <tbody><tr><td>
+  <table cellpadding="0" cellspacing="0" width="100%">
+   <tbody><tr>
+    <td width="1"><img src="STARTTLS_Documentation_files/top-l.jpg" alt="The InspIRCd Project" style="vertical-align: top;"></td>
+    <td class="menu-top" width="100%"><img src="STARTTLS_Documentation_files/top-m.jpg" alt="" style="vertical-align: top;"></td>
+    <td width="1"><img src="STARTTLS_Documentation_files/top-r.jpg" alt="" style="vertical-align: top;"></td>
+   </tr>
+  </tbody></table>
+ <table cellpadding="0" cellspacing="0" width="100%">
+   <tbody><tr>
+    <td width="1"><img src="STARTTLS_Documentation_files/mid-l.jpg" alt="" style="vertical-align: top;"></td>
+    <td class="top" width="100%">
+     <a href="http://www.inspircd.org/index.php">Home</a> |
+     <a href="http://wiki.inspircd.org/Credits">Developers</a> |
+     <a href="http://wiki.inspircd.org/">Wiki</a> |
+     <a href="http://www.inspircd.org/forum">Forums</a> |
+     <a href="http://www.inspircd.org/bugtrack">Bug Tracker</a> |
+         <a href="http://gitorious.org/inspircd/inspircd/">GIT</a> |
+         <a href="http://sourceforge.net/project/showfiles.php?group_id=62756">Download</a> |
+         <a href="http://www.inspircd.org/index.php?p=stats">Stats</a>
+    </td>
+    <td width="1"><img src="STARTTLS_Documentation_files/mid-r.jpg" alt="" style="vertical-align: top;"></td>
+   </tr>
+  </tbody></table>
+  <table cellpadding="0" cellspacing="0" width="100%">
+   <tbody><tr>
+    <td width="1"><img src="STARTTLS_Documentation_files/bot-l.jpg" alt="" style="vertical-align: top;"></td>
+    <td class="menu-bot" width="100%"><img src="STARTTLS_Documentation_files/bot-m.jpg" alt="" style="vertical-align: top;"></td>
+    <td width="1"><img src="STARTTLS_Documentation_files/bot-r.jpg" alt="" style="vertical-align: top;"></td>
+   </tr>
+  </tbody></table>
+ </td></tr>
+</tbody></table>
+
+
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 class="firstHeading">STARTTLS Documentation</h1>
+
+
+
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7883554104697203";
+/* Bugtracker Unit */
+google_ad_slot = "1790873298";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="STARTTLS_Documentation_files/show_ads.js">
+</script>
+</center>
+
+
+
+		<div id="bodyContent">
+			<h3 id="siteSub">From the makers of InspIRCd.</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Contents"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#What_Is_STARTTLS.3F"><span class="tocnumber">1</span> <span class="toctext">What Is STARTTLS?</span></a>
+<ul>
+<li class="toclevel-2"><a href="#How_does_it_work.3F"><span class="tocnumber">1.1</span> <span class="toctext">How does it work?</span></a></li>
+<li class="toclevel-2"><a href="#What_is_TLS.2C_compared_to_SSL.3F"><span class="tocnumber">1.2</span> <span class="toctext">What is TLS, compared to SSL?</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#How_can_an_IRC_client_discover_support_for_STARTTLS.3F"><span class="tocnumber">2</span> <span class="toctext">How can an IRC client discover support for STARTTLS?</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Discovery_via_CAP"><span class="tocnumber">2.1</span> <span class="toctext">Discovery via CAP</span></a>
+<ul>
+<li class="toclevel-3"><a href="#Example_session_where_TLS_is_discovered"><span class="tocnumber">2.1.1</span> <span class="toctext">Example session where TLS is discovered</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2"><a href="#Forced_request"><span class="tocnumber">2.2</span> <span class="toctext">Forced request</span></a>
+<ul>
+<li class="toclevel-3"><a href="#Example_session_where_TLS_is_used"><span class="tocnumber">2.2.1</span> <span class="toctext">Example session where TLS is used</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Recommended_Client_Interface"><span class="tocnumber">3</span> <span class="toctext">Recommended Client Interface</span></a></li>
+<li class="toclevel-1"><a href="#Handling_errors"><span class="tocnumber">4</span> <span class="toctext">Handling errors</span></a></li>
+<li class="toclevel-1"><a href="#Clients_With_STARTTLS_Support"><span class="tocnumber">5</span> <span class="toctext">Clients With STARTTLS Support</span></a></li>
+<li class="toclevel-1"><a href="#External_references"><span class="tocnumber">6</span> <span class="toctext">External references</span></a></li>
+<li class="toclevel-1"><a href="#Versions"><span class="tocnumber">7</span> <span class="toctext">Versions</span></a></li>
+</ul>
+</td></tr></tbody></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="What_Is_STARTTLS.3F" id="What_Is_STARTTLS.3F"></a><h2> <span class="mw-headline"> What Is STARTTLS? </span></h2>
+<p>STARTTLS is a protocol feature commonly found in e-mail protocols, 
+which allows SSL and plaintext connections to co-exist on the same port.
+ This is useful as it simplifies firewall rules (only requiring one port
+ to be opened rather than two) and adds user-friendliness as the user 
+must only know one port (in IRC's case, port 6667). On InspIRCd, the 
+STARTTLS extension requires <a href="http://wiki.inspircd.org/Modules/cap" title="Modules/cap" class="mw-redirect">m_cap.so</a> and <a href="http://wiki.inspircd.org/Modules/ssl_gnutls" title="Modules/ssl gnutls" class="mw-redirect">m_ssl_gnutls.so</a>.
+</p><p>IRC STARTTLS is an open standard, and we encourage all client 
+developers and IRC Daemon developers to implement it where possible, to 
+provide more choice for users. This protocol is fairly easy to implement
+ if your client/ircd already supports SSL, and even easier if it also 
+already supports the CAP extension.
+</p>
+<a name="How_does_it_work.3F" id="How_does_it_work.3F"></a><h3> <span class="mw-headline"> How does it work? </span></h3>
+<p>To use STARTTLS a client simply sends STARTTLS to the server before 
+the client registers with the server using the NICK and USER commands. 
+After sending this command both client and server switch to TLS/SSL 
+mode, based upon the plaintext numeric reply generated by the STARTTLS 
+command, and cannot switch back to plain text mode. The client must then
+ send an SSL/TLS handshake to the server and the connection continues in
+ the same manner as one on a dedicated SSL port (such as 6697).
+</p>
+<a name="What_is_TLS.2C_compared_to_SSL.3F" id="What_is_TLS.2C_compared_to_SSL.3F"></a><h3> <span class="mw-headline"> What is TLS, compared to SSL? </span></h3>
+<p>TLS is a newer name for the SSL protocol suite. Both protocols are 
+inter-operable and a client may use OpenSSL, for example, to implement 
+the STARTTLS protocol.
+</p>
+<a name="How_can_an_IRC_client_discover_support_for_STARTTLS.3F" id="How_can_an_IRC_client_discover_support_for_STARTTLS.3F"></a><h2> <span class="mw-headline"> How can an IRC client discover support for STARTTLS? </span></h2>
+<p>There are two different methods for discovering STARTTLS support, each with advantages and disadvantages
+</p>
+<a name="Discovery_via_CAP" id="Discovery_via_CAP"></a><h3> <span class="mw-headline"> Discovery via CAP </span></h3>
+<p>There is a somewhat standardized method of determining server capabilities, called the <a href="http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html" class="external text" title="http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html" rel="nofollow">CAP extension</a>
+ which is implemented in ratbox and all derivatives, and InspIRCd and 
+derivatives. CAP is also under consideration by the Undernet and IRCNet 
+developers. Sending 'CAP LS' to enumerate the capabilities of the server
+ (before client registration) will return the <b>tls</b> capability in the list if STARTTLS is available.
+</p><p>It is <b>important to note</b> that if m_cap is not loaded on an InspIRCd server, or a server does not support CAP at all, then CAP LS will generate <b>no output</b>. The client author <b>must</b> send the normal PASS/USER/NICK immediately following the CAP LS command to handle this case.
+</p><p>It is worth noting here that a client may request the tls 
+capability with CAP REQ, but this will do nothing. The STARTTLS command 
+will operate on servers which advertise the capability regardless of if 
+the client requests the capability or not. This is to keep compatibility
+ with version 1.1 of this specification.
+</p>
+<a name="Example_session_where_TLS_is_discovered" id="Example_session_where_TLS_is_discovered"></a><h4> <span class="mw-headline"> Example session where TLS is discovered </span></h4>
+<pre>&lt;&lt;&nbsp;:test2.chatspike.net NOTICE Auth&nbsp;:*** Looking up your hostname...
+&lt;&lt;&nbsp;:test2.chatspike.net NOTICE Auth&nbsp;:*** Found your hostname (brainwave.brainbox.cc) -- cached
+&gt;&gt; CAP LS
+&gt;&gt; NICK&nbsp;:Brain
+&gt;&gt; USER Brain * *&nbsp;:Test user
+&lt;&lt;&nbsp;:test2.chatspike.net CAP * LS&nbsp;:sasl userhost-in-names tls multi-prefix
+&gt;&gt; STARTTLS
+&lt;&lt;&nbsp;:test2.chatspike.net 670 nickname&nbsp;:STARTTLS successful, go ahead with TLS handshake
+
+           (tls handshake goes here)
+
+&gt;&gt; CAP END
+</pre>
+<p>After receiving the 670 numeric, the client immediately sends the TLS
+ handshake, which will cause the server to respond in a similar fashion.
+</p><p>If there was a failure initializing TLS, you would instead receive the 691 numeric:
+</p>
+<pre>&lt;&lt;&nbsp;:test2.chatspike.net 691 nickname&nbsp;:STARTTLS failure
+&gt;&gt; CAP END
+</pre>
+<a name="Forced_request" id="Forced_request"></a><h3> <span class="mw-headline"> Forced request </span></h3>
+<p>With automatic discovery, it is possible for an attacker to strip the
+ tls indicator from the TCP stream and/or forge a 691 reply to the 
+STARTTLS command, forcing a fallback to plaintext. Additionally, the 
+server password must be sent in the clear to support servers that do not
+ respond to CAP LS.
+</p><p>If it is known that a specific server supports STARTTLS (for 
+example, by the user choosing STARTTLS as an option when connecting, or 
+possibly a cached value from previous connections to the server), then 
+the STARTTLS command can be sent as the <b>first</b> command to the 
+server. If the client does not get a 670 response from the server, the 
+connection should be aborted and an error presented to the user.
+</p>
+<a name="Example_session_where_TLS_is_used" id="Example_session_where_TLS_is_used"></a><h4> <span class="mw-headline"> Example session where TLS is used </span></h4>
+<pre>&lt;&lt;&nbsp;:test2.chatspike.net NOTICE Auth&nbsp;:*** Looking up your hostname...
+&gt;&gt; STARTTLS
+&lt;&lt;&nbsp;:test2.chatspike.net NOTICE Auth&nbsp;:*** Found your hostname (brainwave.brainbox.cc)
+&lt;&lt;&nbsp;:test2.chatspike.net 670 nickname&nbsp;:STARTTLS successful, go ahead with TLS handshake
+
+           (tls handshake goes here)
+
+&gt;&gt; PASS&nbsp;:verysecret
+&gt;&gt; NICK&nbsp;:Brain
+</pre>
+<p>After receiving the 670 numeric, the client immediately sends the TLS
+ handshake, which will cause the server to respond in a similar fashion.
+</p>
+<a name="Recommended_Client_Interface" id="Recommended_Client_Interface"></a><h2> <span class="mw-headline"> Recommended Client Interface </span></h2>
+<ul><li> Clients should allow the user to specify that TLS be used to 
+connect to a server. This should be an option when setting up servers, 
+similar to the interface that allows specifying that a port requires 
+SSL.
+</li><li> If a user has requested that TLS be used, the client <b>must</b>
+ use TLS to connect or clearly warn the user if the TLS session setup 
+fails. Otherwise, the client is vulnerable to a downgrade attack: an 
+attacker can remove the STARTTLS request from the stream sent to the 
+server and/or remove the TLS capabilities from the text sent by the 
+server.
+</li><li> If a user does not specify that TLS be used to connect, the client <i>may</i>
+ attempt to negotiate a TLS session automatically by querying for the 
+tls CAP. If this automatic negotiation succeeds, an option for the user 
+to require TLS on all future connections to the server may be useful.
+</li><li> A server <i>may</i> optionally advertise a STARTTLS token in 
+the RPL_ISUPPORT (005) numeric after registration, if STARTTLS is 
+supported. Client authors should <b>not</b> use this as a facility for 
+detecting STARTTLS in any way if they intend to use it. This would 
+introduce a dangerous security hole by leaking server passwords etc. It 
+is purely informational, for users and simple statistics bots to gather 
+information from.
+</li></ul>
+<a name="Handling_errors" id="Handling_errors"></a><h2> <span class="mw-headline"> Handling errors </span></h2>
+<ul><li> In the case that the STARTTLS command fails, it is the client 
+author's responsibility to make the user completely aware that their 
+connection is still plaintext and they should exercise caution. It is 
+recommended that an option to disconnect (even so far as to be made the 
+default behaviour) should be provided in this case.
+</li><li> In the case that the 691 error numeric is received, the client
+ should take action to warn the user that their connection will not be 
+secured, or potentially take other automatic action such as 
+disconnecting from the server to avoid plaintext, or reconnecting to a 
+dedicated SSL port.
+</li><li> If CAP negotiation has been used to verify TLS support, <b>it 
+is relatively safe for the client to wait after STARTTLS for one of the 
+670 or 691 numerics, as one or the other can always be guaranteed as a 
+response from the STARTTLS command if it exists.</b>
+</li><li> If a client tries to send STARTTLS more than once, the duplicate requests will generate the 691 numeric for TLS failure.
+</li><li> If an error occurs and the user has specified an absolute 
+requirement on TLS/SSL, then the client should reconnect to a dedicated 
+SSL port if available, or not connect at all without the user 
+reconfiguring the client.
+</li></ul>
+<a name="Clients_With_STARTTLS_Support" id="Clients_With_STARTTLS_Support"></a><h2> <span class="mw-headline"> Clients With STARTTLS Support </span></h2>
+<ul><li> <a href="http://www.kvirc.net/" class="external text" title="http://www.kvirc.net" rel="nofollow">KVIrc</a>
+</li><li> envbot
+</li><li> janus
+</li></ul>
+<a name="External_references" id="External_references"></a><h2> <span class="mw-headline"> External references </span></h2>
+<ul><li> <a href="http://sial.org/howto/openssl/tls-name/" class="external text" title="http://sial.org/howto/openssl/tls-name/" rel="nofollow">SSL/TLS and STARTTLS in other protocols</a>
+</li><li> <a href="http://www.rfc.net/rfc2487.html" class="external text" title="http://www.rfc.net/rfc2487.html" rel="nofollow">STARTTLS over SMTP RFC</a>
+</li><li> <a href="http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html" class="external text" title="http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html" rel="nofollow">Current CAP documentation</a>
+</li><li> <a href="http://www.leeh.co.uk/ircd/client-cap.txt" class="external text" title="http://www.leeh.co.uk/ircd/client-cap.txt" rel="nofollow">Early IRC CAP documentation</a>
+</li></ul>
+<a name="Versions" id="Versions"></a><h2> <span class="mw-headline"> Versions </span></h2>
+<ol><li>Version 1.0 - Initial revision <a href="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;oldid=10275" class="external text" title="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;oldid=10275" rel="nofollow">24 July 2008</a>
+</li><li>Version 1.1 - Change failure numeric from 671 to 691 to resolve conflict with unreal's SSL numeric <a href="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;oldid=11336" class="external text" title="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;oldid=11336" rel="nofollow">31 December 2008</a>
+</li><li>Version 1.2 - Clarify the difference between automatic 
+discovery of TLS and forced use, relax the ordering restriction to avoid
+ forcing a timeout on servers not supporting CAP. <a href="http://wiki.inspircd.org/index.php?oldid=12462" class="external text" title="http://wiki.inspircd.org/index.php?oldid=12462" rel="nofollow">16 February 2010</a>
+</li></ol>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 23/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key inspircd-wiki_:pcache:idhash:2763-0!1!0!!en!2!edit=0 and timestamp 20110331051340 -->
+<div class="printfooter">
+Retrieved from "<a href="http://wiki.inspircd.org/STARTTLS_Documentation">http://wiki.inspircd.org/STARTTLS_Documentation</a>"</div>
+			<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://wiki.inspircd.org/Special:Categories" title="Special:Categories">Category</a>: <span dir="ltr"><a href="http://wiki.inspircd.org/Category:Developer" title="Category:Developer">Developer</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="http://wiki.inspircd.org/STARTTLS_Documentation" title="View the content page [alt-shift-c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="http://wiki.inspircd.org/index.php?title=Talk:STARTTLS_Documentation&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;action=edit" title="This page is protected. You can view its source. [alt-shift-e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;action=history" title="Past versions of this page. [alt-shift-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://wiki.inspircd.org/index.php?title=Special:UserLogin&amp;returnto=STARTTLS_Documentation" title="You must log in to edit pages. [alt-shift-o]" accesskey="o">Log in / create account</a></li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+
+
+   <table class="inspbox" bgcolor="#ffffff" cellpadding="0" cellspacing="0">
+    <tbody><tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/top-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/top-r.gif" alt=""></td>
+    </tr>
+    <tr>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+     <td align="center" width="100%">
+
+	<h5>Navigation</h5>
+
+     </td>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+    </tr>
+    <tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/mid-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/mid-r.gif" alt=""></td>
+    </tr>
+    <tr>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+     <td style="padding: 0pt 2px 2px;" width="100%">
+
+			<ul>
+				<li id="n-Introduction"><a href="http://wiki.inspircd.org/Introduction">Introduction</a></li>
+				<li title="About the project, what you can do, where to find things" id="n-portal"><a href="http://www.inspircd.org/bugtrack/" title="About the project, what you can do, where to find things">Bug Tracker</a></li>
+				<li title="Find background information on current events" id="n-currentevents"><a href="http://www.inspircd.org/forums/" title="Find background information on current events">Forums</a></li>
+				<li id="n-recentchanges"><a href="http://wiki.inspircd.org/Special:RecentChanges" title="The list of recent changes in the wiki. [alt-shift-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-FAQ"><a href="http://wiki.inspircd.org/FAQ">FAQ</a></li>
+				<li id="n-Oper-Commands"><a href="http://wiki.inspircd.org/InspIRCd_Oper_Commands">Oper Commands</a></li>
+				<li id="n-Module-List-1.2"><a href="http://wiki.inspircd.org/1.2/Modules">Module List 1.2</a></li>
+				<li id="n-Module-List-2.0"><a href="http://wiki.inspircd.org/2.0/Modules">Module List 2.0</a></li>
+				<li id="n-User-Modes"><a href="http://wiki.inspircd.org/User_Modes">User Modes</a></li>
+				<li id="n-Channel-Modes"><a href="http://wiki.inspircd.org/Channel_Modes">Channel Modes</a></li>
+				<li id="n-SNOMASKs"><a href="http://wiki.inspircd.org/SNOMASK">SNOMASKs</a></li>
+				<li id="n-List-of-Numerics"><a href="http://wiki.inspircd.org/List_Of_Numerics">List of Numerics</a></li>
+			</ul>
+
+     </td>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+    </tr>
+    <tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/bot-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/bot-r.gif" alt=""></td>
+    </tr>
+   </tbody></table>
+   <table class="inspbox" bgcolor="#ffffff" cellpadding="0" cellspacing="0">
+    <tbody><tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/top-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/top-r.gif" alt=""></td>
+    </tr>
+    <tr>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+     <td align="center" width="100%">
+
+		<h5><label for="searchInput">Search</label></h5>
+
+     </td>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+    </tr>
+    <tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/mid-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/mid-r.gif" alt=""></td>
+    </tr>
+    <tr>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+     <td style="padding: 0pt 2px 2px;" width="100%">
+
+		<div id="searchBody">
+			<center>
+			<form action="/Special:Search" id="searchform"><div>
+				<input id="searchInput" name="search" title="Search Inspire IRCd (InspIRCd) [alt-shift-f]" accesskey="f" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" type="submit">
+			</div></form></center>
+		</div>
+     </td>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+    </tr>
+    <tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/bot-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/bot-r.gif" alt=""></td>
+    </tr>
+   </tbody></table>
+
+
+ 
+   <table class="inspbox" bgcolor="#ffffff" cellpadding="0" cellspacing="0">
+    <tbody><tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/top-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/top-r.gif" alt=""></td>
+    </tr>
+    <tr>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+     <td align="center" width="100%">  
+
+		<h5>Toolbox</h5>
+
+     </td>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+    </tr>
+    <tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/mid-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/mid-r.gif" alt=""></td>
+    </tr>
+    <tr>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+     <td style="padding: 0pt 2px 2px;" width="100%">
+
+
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://wiki.inspircd.org/Special:WhatLinksHere/STARTTLS_Documentation" title="List of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://wiki.inspircd.org/Special:RecentChangesLinked/STARTTLS_Documentation" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="http://wiki.inspircd.org/Special:SpecialPages" title="List of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://wiki.inspircd.org/index.php?title=STARTTLS_Documentation&amp;printable=yes" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://wiki.inspircd.org/index.php?oldid=12463" title="Permanent link to this version of the page">Permanent link</a></li>			</ul>
+     </td>
+     <td class="left-sides" width="1"><img src="STARTTLS_Documentation_files/sides.gif" alt=""></td>
+    </tr>
+    <tr style="height: 1px;">
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/bot-l.gif" alt=""></td>
+     <td class="left-topbot" style="height: 3px; font-size: 1px;" width="100%"><img src="STARTTLS_Documentation_files/hori.gif" alt="head"></td>
+     <td style="height: 3px; font-size: 1px;" width="1px"><img src="STARTTLS_Documentation_files/bot-r.gif" alt=""></td>
+    </tr>
+   </tbody></table>
+
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="STARTTLS_Documentation_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="STARTTLS_Documentation_files/gnu-fdl.png" alt="GNU Free Documentation License 1.2"></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> Modified 01:00, 17 February 2010.</li>
+					<li id="viewcount">7,673 Hits</li>
+					<li id="copyright">Licensed under GNU FDL 1.2</li>
+					<li id="privacy"><a href="http://wiki.inspircd.org/Inspire_IRCd_%28InspIRCd%29:Privacy_policy" title="Inspire IRCd (InspIRCd):Privacy policy">Privacy policy</a></li>
+					<li id="about"><a href="http://wiki.inspircd.org/Inspire_IRCd_%28InspIRCd%29:About" title="Inspire IRCd (InspIRCd):About">About Inspire IRCd (InspIRCd)</a></li>
+					<li id="disclaimer"><a href="http://wiki.inspircd.org/Inspire_IRCd_%28InspIRCd%29:General_disclaimer" title="Inspire IRCd (InspIRCd):General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.281 secs. -->
+</body></html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="KEYWORDS" content="IRC URI">
+<meta name="robots" content="index,follow">
+<link rel="shortcut icon" href="http://about.psyc.eu/skins/common/images/favicon.ico">
+    <title>IRC URI - about.psyc.eu</title>
+    <style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/skins/stereoZine/main.css"; /*]]>*/</style>
+    <link rel="stylesheet" type="text/css" media="print" href="IRC_URI_files/commonPrint.css">
+    <!--[if lt IE 5.5000]><style type="text/css">@import "/skins/stereoZine/IE50Fixes.css";</style><![endif]-->
+    <!--[if IE 5.5000]><style type="text/css">@import "/skins/stereoZine/IE55Fixes.css";</style><![endif]-->
+    <!--[if gte IE 6]><style type="text/css">@import "/skins/stereoZine/IE60Fixes.css";</style><![endif]-->
+    <!--[if IE]><script type="text/javascript" src="/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+    <script type="text/javascript" src="IRC_URI_files/a"></script>    <script type="text/javascript" src="IRC_URI_files/wikibits.js"></script>
+    <style type="text/css">/*<![CDATA[*/
+@import "/?title=MediaWiki:StereoZine.css&action=raw&ctype=text/css&smaxage=18000";
+@import "/?title=-&action=raw&gen=css&maxage=18000";
+/*]]>*/</style>              </head>
+  <body class="ns-0">
+    <div id="globalWrapper">
+      <div id="column-content">
+	<div id="content">
+	  <a name="top" id="top"></a>
+	  	  <h1 class="firstHeading">IRC URI</h1>
+	  <div class="psyc"><a href="http://about.psyc.eu/"><img alt="" src="IRC_URI_files/minipsyc.png" height="26" width="130"></a></div>
+	  <div id="bodyContent">
+	    	    	    <!-- start content -->
+	    <p><br>
+</p>
+<table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#Extending_the_existing_IRC_URL_schemes"><span class="tocnumber">1</span> <span class="toctext">Extending the existing IRC URL schemes</span></a></li>
+<li class="toclevel-1"><a href="#The_new_IRC_URI_Scheme"><span class="tocnumber">2</span> <span class="toctext">The new IRC URI Scheme</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Character_set_of_nicknames"><span class="tocnumber">2.1</span> <span class="toctext">Character set of nicknames</span></a></li>
+<li class="toclevel-2"><a href="#NOTE:_The_prefix_.22.2A.22"><span class="tocnumber">2.2</span> <span class="toctext">NOTE: The prefix "*"</span></a></li>
+<li class="toclevel-2"><a href="#Character_set_of_channels"><span class="tocnumber">2.3</span> <span class="toctext">Character set of channels</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#References"><span class="tocnumber">3</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1"><a href="#Developer_Tips"><span class="tocnumber">4</span> <span class="toctext">Developer Tips</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Regular_Expression"><span class="tocnumber">4.1</span> <span class="toctext">Regular Expression</span></a></li>
+<li class="toclevel-2"><a href="#Escaping"><span class="tocnumber">4.2</span> <span class="toctext">Escaping</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></tbody></table>
+<p><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=1" title="IRC URI">edit</a>]</div><a name="Extending_the_existing_IRC_URL_schemes"></a><h2> Extending the existing IRC URL schemes </h2>
+<p>Following <a href="http://about.psyc.eu/IRC" title="IRC">IRC</a> <a href="http://about.psyc.eu/Uniform" title="Uniform">URL Scheme(s)</a> have been considered:
+</p>
+<dl><dd><a href="http://www.mozilla.org/projects/rt-messaging/chatzilla/irc-urls.html" class="external free" title="http://www.mozilla.org/projects/rt-messaging/chatzilla/irc-urls.html" rel="nofollow">http://www.mozilla.org/projects/rt-messaging/chatzilla/irc-urls.html</a>
+</dd><dd><a href="http://www.w3.org/Addressing/draft-mirashi-url-irc-01.txt" class="external free" title="http://www.w3.org/Addressing/draft-mirashi-url-irc-01.txt" rel="nofollow">http://www.w3.org/Addressing/draft-mirashi-url-irc-01.txt</a>
+</dd><dd><a href="http://tools.ietf.org/html/draft-butcher-irc-url-04" class="external free" title="http://tools.ietf.org/html/draft-butcher-irc-url-04" rel="nofollow">http://tools.ietf.org/html/draft-butcher-irc-url-04</a>
+</dd></dl>
+<p>But all of them do not define IRC <a href="http://about.psyc.eu/Identification" title="Identification">identities</a>.
+ Each of those proposals addresses how to access a certain network or 
+chatroom. Even if only few networks enforce owned nicknames and thus the
+ whole idea of identity is flaky on IRC, we still need a way to refer to
+ a sender/recipient in a real-world application.
+</p><p>So this proposal compensates by specifying an IRC URI scheme to extend existing IRC URL schemes. The <a href="http://about.psyc.eu/Semantic" title="Semantic">semantic</a> difference is shown by the presence or absence of the <b>//</b> double slashes.
+</p>
+<dl><dd>Since IRC does not provide any protocol to reach out for 
+identities on remote servers, this URI scheme doesn't find much 
+application. We were thinking of using it in conjunction with <a href="http://about.psyc.eu/Interserver" title="Interserver">interserver</a>-level <a href="http://about.psyc.eu/Gateway" title="Gateway">gateways</a>, but figured out, it is more useful to assign <a href="http://about.psyc.eu/PSYC" title="PSYC">PSYC</a> and <a href="http://about.psyc.eu/XMPP" title="XMPP">XMPP</a> <a href="http://about.psyc.eu/Uniform" title="Uniform">uniforms</a> to people on such IRC networks, rather than having to define a <a href="http://about.psyc.eu/Routing" title="Routing">routing</a> principle for irc: identities. <a href="http://about.psyc.eu/Bummskraut" title="Bummskraut">Bummskraut</a> has been using this syntax to identify IRC <a href="http://about.psyc.eu/Contact" title="Contact">contacts</a>, but later dropped the entire URI approach to routing. <a href="http://about.psyc.eu/Psyced" title="Psyced">psyced</a>
+ uses irc: access URLs rather than identities, with the more humble 
+benefit of being compatible with IRC clients that support such syntax. 
+Maybe one day we'll implement a generic routing strategy for IRC 
+identities over <a href="http://about.psyc.eu/Gatebot" title="Gatebot">gatebots</a>.
+</dd></dl>
+<p>See also: <a href="http://about.psyc.eu/IRCPLUS" title="IRCPLUS">IRCPLUS</a>.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=2" title="IRC URI">edit</a>]</div><a name="The_new_IRC_URI_Scheme"></a><h2>The new IRC URI Scheme</h2>
+<pre>   irc:&lt;destination&gt;@&lt;authority&gt;  &nbsp;; IRC-URI as specified here
+   irc://&lt;access&gt;                 &nbsp;; IRC-URL as specified elsewhere
+</pre>
+<pre>   IRC-URI-reference&nbsp;:= "irc" ":" opaque-string
+   opaque-string    &nbsp;:= access | identity
+
+   access           &nbsp;:= hier_part &nbsp;; see RFC 2396 and other IRC URI specs
+   identity         &nbsp;:= destination "@" authority  
+   destination      &nbsp;:= "~" nick | channel_prefix channel | reserved_prefix reserved_destination
+   nick             &nbsp;:= 1*(unreserved | escaped)
+                       &nbsp;; Note: Following characters in nicknames (as defined in RFC 2812) 
+                       &nbsp;; can only be used in URI nicknames in the escaped form:
+                       &nbsp;; "[" | "]" | "\" | "`" | "^" | "{" | "|" | "}"
+                       &nbsp;; See also the note about allowed characters in nicks below.
+
+   channel          &nbsp;:= 1*(unreserved | escaped)
+                       &nbsp;; Note: All special characters in the channelname (which are not unreserved) 
+                       &nbsp;; need to be escaped.
+                       &nbsp;; See also the note about allowed characters in channels below.
+
+   channel_prefix   &nbsp;:= "*" | "!" | "+" | "&amp;"
+                       &nbsp;; These are the currently defined channel prefixes. 
+                       &nbsp;; Note: The prefix "*" is mapped to the irc channel prefix "#"
+
+   reserved_destination&nbsp;:= 1*(unreserved | escaped)
+   reserved_prefix  &nbsp;:= alphanum | prefix_mark | ";" | "?" | ":" | "@" | "=" | "$" | ","
+                       &nbsp;; reserved_prefix is basically uric (as defined in RFC 2396) 
+                       &nbsp;; except "%" and "/" and the characters in channel_prefix
+
+   prefix_mark      &nbsp;:= "-" | "_" | "." | "'" | "(" | ")"
+
+  &nbsp;; For definition of alphanum see RFC 2396.
+  &nbsp;; For definition of unreserved and escaped see RFC 2396.
+  &nbsp;; For definition of the authority part see RFC 2396. The authority part should
+  &nbsp;; be a host of the IRC network or some other authority which allows you to reach the destination
+</pre>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=3" title="IRC URI">edit</a>]</div><a name="Character_set_of_nicknames"></a><h3>Character set of nicknames</h3>
+<p>The actual allowed characters in the <tt>&lt;nick&gt;</tt> part in the URI depends
+on the IRC server or network. If the allowed characters are unkown they should
+be limited to the characters that are allowed in the nickname as defined in <a href="http://tools.ietf.org/rfcmarkup?doc=2812" class="external" title="http://tools.ietf.org/rfcmarkup?doc=2812">RFC 2812</a>.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=4" title="IRC URI">edit</a>]</div><a name="NOTE:_The_prefix_.22.2A.22"></a><h3>NOTE: The prefix "*"</h3>
+<p>The channel prefix "*" needs to be mapped to "#" internally. And if you
+want to display an IRC channel with a "#" prefix you need to map that back
+to "*"!
+</p>
+<dl><dd>In theory we could stick to the "#" which means encoding it as 
+"%23". But, do you find this acceptable? Each and every URI to come up 
+with an escape code, and every user having to learn  what it means?
+</dd></dl>
+<p>For completeness: Former versions of the URI RFC permitted "#" to appear in URIs without path. This has been changed since 1998.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=5" title="IRC URI">edit</a>]</div><a name="Character_set_of_channels"></a><h3>Character set of channels</h3>
+<p>Same rules that apply to <tt>&lt;nick&gt;</tt> apply to <tt>&lt;channel&gt;</tt>:
+the characters should be limited to the ones that are allowed in channel
+names as defined in <a href="http://tools.ietf.org/rfcmarkup?doc=2812" class="external" title="http://tools.ietf.org/rfcmarkup?doc=2812">RFC 2812</a>, unless it is known that the server or network allows
+a different set of characters in channel names.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=6" title="IRC URI">edit</a>]</div><a name="References"></a><h2>References</h2>
+<ul><li> <a href="http://tools.ietf.org/rfcmarkup?doc=2396" class="external" title="http://tools.ietf.org/rfcmarkup?doc=2396">RFC 2396</a> - Uniform Resource Identifiers (URI): Generic Syntax
+</li><li> <a href="http://tools.ietf.org/rfcmarkup?doc=2812" class="external" title="http://tools.ietf.org/rfcmarkup?doc=2812">RFC 2812</a> - Internet Relay Chat: Client Protocol
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=7" title="IRC URI">edit</a>]</div><a name="Developer_Tips"></a><h2>Developer Tips</h2>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=8" title="IRC URI">edit</a>]</div><a name="Regular_Expression"></a><h3>Regular Expression</h3>
+<pre>   /^irc:([~\*!+&amp;^/])([^@]+)@(.+)$/
+
+   $1 is the prefix, which determines the meaning of $2
+   $2 is the destination, either a channelname or a nickname
+   $3 is the authority
+
+   $2 and $3 have to be unescaped as described in RFC 2396 section "2.4. Escape Sequences".
+</pre>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit&amp;section=9" title="IRC URI">edit</a>]</div><a name="Escaping"></a><h3>Escaping</h3>
+<p><tt>&lt;authority&gt;</tt>, <tt>&lt;nick&gt;</tt>, <tt>&lt;channel&gt;</tt> and 
+<tt>&lt;reserved_destination&gt;</tt> must be escaped when generating
+a URI and unescaped when parsing/splitting up the URI.
+</p><p>All characters that don't belong to the restricted set of characters in a URI
+(see <a href="http://tools.ietf.org/rfcmarkup?doc=2396" class="external" title="http://tools.ietf.org/rfcmarkup?doc=2396">RFC 2396</a> "2. URI Characters and Escape Sequences") or are used as delimiters
+(eg. "@" in <tt>&lt;nick&gt;</tt> and <tt>&lt;channel&gt;</tt>) must be escaped when 
+constructing a URI.
+</p><p>URI escape line for Perl (for nicknames, channelnames):
+</p>
+<pre>   # this also works for components of the authority part:
+   $other =~ s/([^a-zA-Z0-9_.-])/uc(sprintf("%%%02x",ord($1)))/eg;
+</pre>
+<p>URI unescape line for Perl:
+</p>
+<pre>   $str =~ s/%([0-9a-fA-F]{2})/chr hex ($1)/eg;
+</pre>
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1807-0!1!0!0!!en!2 and timestamp 20110307211311 -->
+<div class="printfooter">
+Retrieved from "<a href="http://about.psyc.eu/IRC_URI">http://about.psyc.eu/IRC_URI</a>"</div>
+	    <div id="catlinks"><p class="catlinks"><a href="http://about.psyc.eu/?title=Special:Categories&amp;article=IRC_URI" title="Special:Categories">Categories</a>: <a href="http://about.psyc.eu/Category:IRC" title="Category:IRC">IRC</a> | <a href="http://about.psyc.eu/Category:Specification" title="Category:Specification">Specification</a></p></div>	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+      </div>
+      <div id="column-one">
+	<div id="p-cactions" class="toplet">
+	  <h5>Views</h5>
+	  <ul>
+	    <li id="ca-nstab-main" class="selected"><a href="http://about.psyc.eu/IRC_URI">Article</a></li><li id="ca-talk" class="new"><a href="http://about.psyc.eu/?title=Talk:IRC_URI&amp;action=edit">Discussion</a></li><li id="ca-edit"><a href="http://about.psyc.eu/?title=IRC_URI&amp;action=edit">Edit</a></li><li id="ca-history"><a href="http://about.psyc.eu/?title=IRC_URI&amp;action=history">History</a></li>	  </ul>
+	</div>
+	<div id="p-personal" class="toplet">
+	  <h5>Personal tools</h5>
+	  <div class="pBody">
+	    <ul>
+	    <li id="pt-login"><a href="http://about.psyc.eu/?title=Special:Userlogin&amp;returnto=IRC_URI">Create an account or log in</a></li>	    </ul>
+	  </div>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="portlet" id="p-nav">
+	  <div class="pBody">
+	    <ul>
+                <li><a href="http://about.psyc.eu/Help:Contents">Help</a></li>
+                <li><a href="http://about.psyc.eu/Software">Software</a></li>
+                <li><a href="http://about.psyc.eu/">About PSYC</a></li>
+                <li><a href="https://psyced.org/PSYC/">Webchat with us</a></li>
+		<li><a href="http://www.psyc.eu/whitepaper/">White Paper</a></li>
+	    </ul>
+	  </div>
+	</div>
+        <div id="p-search" class="portlet">
+          <div class="pBody">
+            <form name="searchform" action="/Special:Search" id="searchform">       
+              <input id="searchInput" name="search" accesskey="f" type="text">
+              <input name="go" class="searchButton" id="searchGoButton" value="Go" type="submit">&nbsp;<input name="fulltext" class="searchButton" value="Search" type="submit">
+            </form>
+          </div>
+        </div>
+	<div class="portlet" id="p-tb">
+	  <div class="pBody">
+	    <ul>
+	    <li><a href="http://about.psyc.eu/Special:Recentchanges">Recent Changes</a></li>
+		  		  <li id="t-whatlinkshere"><a href="http://about.psyc.eu/Special:Whatlinkshere/IRC_URI">What links here</a></li>
+		  		  <li id="t-recentchangeslinked"><a href="http://about.psyc.eu/Special:Recentchangeslinked/IRC_URI">Related changes</a></li>
+		  	      	      	      	      	      	      	      	      	      <li id="t-specialpages"><a href="http://about.psyc.eu/Special:Specialpages">Special pages</a></li>	      	    </ul>
+	  </div>
+	</div>
+	      </div><!-- end of the left (by default at least) column -->
+      <div class="visualClear"></div>
+      <div id="footer">
+	<ul id="f-list">
+	    <li></li>
+	  <li id="f-lastmod"> This page was last modified 11:08, 21 October 2008.</li>	  <li id="f-viewcount">This page has been accessed 9,169 times.</li>	  	  	</ul>
+<p id="nerdybutts"><a href="http://www.psyc.eu/"><img src="IRC_URI_files/psyc.png" alt=""></a><a href="http://about.psyc.eu/Sponsor"><img src="IRC_URI_files/snafu.png" alt=""></a><a href="http://about.psyc.eu/Category:Folklore"><img src="IRC_URI_files/dirty.png" alt=""></a></p>
+      </div>
+    </div>
+    <!-- Served by lo in 0.06 secs. -->  
+
+</body></html>

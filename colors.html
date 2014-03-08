@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head>
+<title>mIRC: Colors</title>
+<meta name="author" content="mIRC Co. Ltd.">
+<meta name="description" content="mIRC: Colors">
+<meta name="keywords" content="mIRC, IRC, Internet Relay Chat, Chat, Chat Rooms, Chat Online">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="colors_files/layout.css">
+</head>
+<body>
+
+<!-- Header Start -->
+<table class="text" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+  <tr>
+    <td class="left"></td>
+    <td class="middle">
+      <div class="hxsnazzy">
+      <div class="hxboxcontent">
+        <table class="text" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+          <tr valign="middle">
+            <td class="w5p"></td>
+            <td><h1 class="logo"><a href="http://www.mirc.com/index.html"><img src="colors_files/barlogo.gif" alt="mIRC" height="16" width="16"></a></h1></td>
+            <td class="w5p"></td>
+            <td class="w10p"><a href="http://www.mirc.com/index.html">Home</a></td>
+            <td class="w5p"><span class="sepright">&nbsp;</span><span class="sepleft">&nbsp;</span></td>
+            <td class="w10p"><a href="http://www.mirc.com/about.html">About</a></td>
+            <td class="w5p"><span class="sepright">&nbsp;</span><span class="sepleft">&nbsp;</span></td>
+            <td class="w10p"><a href="http://www.mirc.com/get.html">Download</a></td>
+            <td class="w5p"><span class="sepright">&nbsp;</span><span class="sepleft">&nbsp;</span></td>
+            <td class="w10p"><a href="http://www.mirc.com/register.html">Register</a></td>
+            <td class="w5p"><span class="sepright">&nbsp;</span><span class="sepleft">&nbsp;</span></td>
+            <td class="w10p"><a href="http://www.mirc.com/news.html">News</a></td>
+            <td class="w5p"><span class="sepright">&nbsp;</span><span class="sepleft">&nbsp;</span></td>
+            <td class="w10p"><a href="http://www.mirc.com/help.html">Help</a></td>
+            <td class="w5p"></td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      <em class="hxbottom"><em class="hxb4"></em><em class="hxb3"></em><em class="hxb2"></em><em class="hxb1"></em></em>
+      </div>
+      <br>
+    </td>
+    <td class="right"></td>
+  </tr>
+</tbody>
+</table>
+<table class="text" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+  <tr>
+    <td class="left"></td>
+    <td class="middle">
+<!-- Header End -->
+
+<!-- Content Start -->
+<table class="text" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+  <tr>
+    <td>
+      <h1 class="title">mIRC Colors</h1>
+      <p>
+      The color codes in mIRC are inserted by using the Control+K key combination.
+      The actual control character inserted in the text is ascii character 3, seen
+      as ^C or inverse C on most UNIX clients.
+      </p><p>
+      The syntax of the color attribute in text has the format ^CN[,M]
+      </p><p>
+      N and M can be any number out of a range 0 to 15 thus allowing a range
+      of sixteen colors.
+      </p><p>
+      N will be the text (foreground) color, M a background color. A background
+      color is not always included. If no background color is set the recieving
+      client uses a default background color (white). Additionally you can use
+      color 99 to indicate a transparent color.
+      </p><p>
+      A plain ^C can be used to turn off all previous color attributes.
+      </p><p>
+      The Control+O key combination in mIRC inserts ascii character 15, which
+      turns off all previous attributes, including color, bold, underline,
+      and italics.
+      </p><p>
+      Technically mIRC accepts the full number range 0 to 99. Thus N and M
+      can maximally be two digits long. The way these colors are interpreted
+      varies from client to client. Some map the numbers back to 0 to 15, others
+      interpret numbers larger than 15 as the default text color.
+      </p><p>
+      You can expect to see combinations like:<br>
+      </p><p>
+      ^C5,12colored text and background^C<br>
+      ^C5colored text^C<br>
+      ^C3colored text ^C5,2more colored text and background^C<br>
+      ^C3,5colored text and background ^C8other colored text but same background^C<br>
+      ^C3,5colored text and background ^C8,7other colored text and different background^C<br>
+      </p><p>
+      As you see the background color remains valid until it is changed or until
+      the entire color is switched off with a ^C. Of course lines can start with
+      colored text from the beginning and a closing ^C is not always given. To
+      specify a background color, a foreground color has to be given. So a ^C,8
+      attribute is not valid and thus ignored.<br>
+      </p><p>
+      Note: if you want to color text that begins with numbers, this syntax requires
+      that you specify the color value as two digits.
+      </p><p>
+      The color indexes 0 to 15 represent the following colors:<br>
+      </p><p>
+      0 white<br>
+      1 black<br>
+      2 blue (navy)<br>
+      3 green<br>
+      4 red<br>
+      5 brown (maroon)<br>
+      6 purple<br>
+      7 orange (olive)<br>
+      8 yellow<br>
+      9 light green (lime)<br>
+      10 teal (a green/blue cyan)<br>
+      11 light cyan (cyan) (aqua)<br>
+      12 light blue (royal)<br>
+      13 pink (light purple) (fuchsia)<br>
+      14 grey<br>
+      15 light grey (silver)<br>
+      </p><p>
+      Note: the above list is an approximation since some clients might interpret
+      these indexes with some variation.<br>
+    </p></td>
+  </tr>
+</tbody>
+</table>
+<!-- Content End -->
+
+<!-- Footer Start -->
+    </td>
+    <td class="right"></td>
+  </tr>
+</tbody>
+</table>
+<table class="text" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+  <tr>
+    <td class="left"></td>
+    <td class="middle">
+      <br>
+      <table class="text" cellpadding="0" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td class="footer">
+            <a href="http://www.mirc.com/privacy.html">Privacy</a>
+            &nbsp;
+            <a href="http://www.mirc.com/contact.html">Contact Us</a>
+            <br>
+            Copyright © mIRC Co. Ltd. 1995-2012. All Rights Reserved.
+          </td>
+        </tr>
+      </tbody>
+      </table>
+      <br>
+    </td>
+    <td class="right"></td>
+  </tr>
+</tbody>
+</table>
+<!-- Footer End -->
+
+
+
+</body></html>

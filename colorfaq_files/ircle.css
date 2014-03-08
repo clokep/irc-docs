@@ -1,0 +1,195 @@
+/* <style type="text/css"> */
+/* ircle.com */
+.link
+{
+	color: #0000ff;
+	text-decoration: underline;
+}
+a
+{
+	color: #303030;
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #202020;
+}
+a:active
+{
+	color: #202020;
+/*
+	color: #FF0366; */
+}
+
+a:hover
+{
+	color: #5050FF;
+}
+body
+{
+	background-color: #ffffff;
+	font-size: 9pt;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", verdana, lucida, sans-serif;
+	/*font-family:  Palatino", "Times", serif;*/
+	margin: 5px 15px 5px 15px;
+margin: 10px;
+padding: 0px;
+	color: #000000;
+	text-shadow: #d8d8d8 0.1em 0.1em 2px; 
+}
+
+.mytable
+{
+	padding: 1px;
+	background-color: #EEEEFF;
+	border-spacing: 1pt;
+}
+
+tr
+{
+	text-align: left;
+	border: 1px solid;
+	border-color: #FFFFFF;
+}
+
+td
+{
+	/* spacing: 10px; */
+	padding: 0px;
+	font-size: 9pt;
+	border: 1px;
+	border-color: #FFFFFF;
+	border-style: solid;
+	border-spacing: 0pt;
+}
+
+th
+{
+	font-size: 9pt;
+	border: 1px solid;
+	border-color: #FFFFFF;
+	padding: 4px;
+}
+
+
+
+caption
+{
+	margin: 0px 0px 0px 2px;
+	padding: 4px;
+	font-size: 9pt;
+	background-color: #C0C0FF;
+}
+
+.newcaption
+{
+	margin: 0px 0px 0px 2px;
+	padding: 4px;
+	text-align: center;
+	background-color: #C0C0FF;
+}
+
+.ircle3
+{
+	font-size: 9pt;
+	text-align: center;
+	/* background-color: #A0A0A0; */
+	/* bordercolor: #0000FF; */
+}
+
+.pagetable
+{
+	margin-left: 20px;
+	width: 620px;
+	padding: 1px;
+	background-color: #FFFFFF;
+	border-spacing: 0pt;
+}
+
+.kopje
+{
+	font-size: 10pt;
+	font-weight: bold;
+	color: #007766;
+}
+
+.main
+{
+/*
+	background-color: #fbd9b0;
+	background-image: url(/gfx/bgbrush.jpg);
+	background-repeat: x;
+*/
+}
+
+.mylinks
+{
+	font-size: 8pt;
+	text-align: center;
+	background-color: #F8F8F8;
+	padding: 4px;
+	height: 13px;
+	margin: 0px;
+	border: 1px;
+	border-color: #888;
+	border-style: solid;
+               background-image: url(/gfx/menubar.gif);
+                background-repeat: x;
+	text-shadow: #d8d8d8 0.1em 0.1em 2px;
+	font-weight: bold;
+}
+
+.mylinks a
+{
+	text-decoration: none;
+}
+
+.ads
+{
+	padding: 10px;
+	border: 1px;
+	border-color: #eee;
+	border-style: solid;
+}
+
+.copyright
+{
+	font-size: 8pt;
+	text-align: center;
+	background-color: #F8F8F8;
+/*background-color: #fbd9b0;*/
+
+	padding: 4px;
+	border: 1px;
+	border-color: #888;
+	border-style: solid;
+}
+
+.irclereference img
+{
+	border: thin silver solid;
+	padding: 2px;
+	background-color: #f8f8f8;
+	horizontal-align: center;
+	
+}
+.irclereference
+{
+font-weight: bold;
+text-align: center;
+}
+
+#menu
+	{
+	clear: both;
+	float: top;
+	top: 0px;left:0px;
+	padding: 0px 10px 0px 0px;
+	margin: 0px;
+/*	width: 1380px; */
+	height: 21px;
+	background-image: url(/gfx/menubar.gif);
+	background-repeat: x;
+}
+

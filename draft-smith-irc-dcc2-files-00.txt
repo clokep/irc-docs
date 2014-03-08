@@ -1,0 +1,674 @@
+
+
+
+Network Working Group                                      D. Smith, Ed.
+Internet-Draft                                                   Algenta
+Expires: November 5, 2004                                    May 7, 2004
+
+
+   Updated Internet Relay Chat (IRC) Client to Client Protocol (DCC2)
+                             File Transfers
+                     draft-smith-irc-dcc2-files-00
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups. Note that other
+   groups may also distribute working documents as Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time. It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at http://
+   www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on November 5, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2004). All Rights Reserved.
+
+Abstract
+
+   The Direct Client Connection v2 (DCC2) specification describes how to
+   create file transfers between individual IRC clients.  This draft
+   describes two direct client connection file transfer protocols, a
+   singe file transfer protocol with file details exchanged over IRC and
+   an advanced multi-file protocol with file details exchanged over a
+   direct client connection.
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 1]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
+     1.1   Background . . . . . . . . . . . . . . . . . . . . . . . .  3
+     1.2   Motivation . . . . . . . . . . . . . . . . . . . . . . . .  3
+     1.3   Conventions  . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  DCC2 Overview  . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.  File Transfers . . . . . . . . . . . . . . . . . . . . . . . .  5
+     3.1   Single File  . . . . . . . . . . . . . . . . . . . . . . .  5
+     3.2   Multi File Transfers . . . . . . . . . . . . . . . . . . .  5
+       3.2.1   Motivation . . . . . . . . . . . . . . . . . . . . . .  5
+       3.2.2   Method . . . . . . . . . . . . . . . . . . . . . . . .  5
+       3.2.3   Multi Send Syntax  . . . . . . . . . . . . . . . . . .  5
+       3.2.4   Multi Header . . . . . . . . . . . . . . . . . . . . .  6
+   4.  Security Considerations  . . . . . . . . . . . . . . . . . . .  8
+   5.  Notes  . . . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+   6.  Acknowledgments  . . . . . . . . . . . . . . . . . . . . . . . 10
+   7.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+       Author's Address . . . . . . . . . . . . . . . . . . . . . . . 10
+       Intellectual Property and Copyright Statements . . . . . . . . 11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 2]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+1.  Introduction
+
+1.1  Background
+
+   The Direct Client Connection 2.0 (DCC2) is a specification currently
+   under development by the <http://www.dcc2.org/>.
+
+   DCC2 creates a framework for standardized connection negotiation
+   between IRC clients. DCC2's design allows clients to automatically
+   negotiate acceptable connection parameters, and makes it possible for
+   users' clients to review the parameters and automate decision-making
+   in the connection negotiation process.
+
+   For more information on the DCC2 specification please consult the
+   <http://www.dcc2.org/>.
+
+1.2  Motivation
+
+   The current DCC protocol does not address IPv4 vs. IPv6 issues, SSL/
+   TLS encryption negotiation, NAT and Firewall traversal, and multiple
+   file/directory file transfers.  DCC file transfers are also flawed in
+   requiring acknowledgement of received bytes during the transfer,
+   something that the underlying TCP protocol already ensures.  Many IRC
+   clients have implemented extensions that try to solve these problems,
+   but the result has been fragmentation of the DCC protocol.  This
+   fragmentation is to a point where only the most simple functions work
+   between different clients.
+
+   DCC2 has been introduced to solve these problems and insure
+   interoperability between all IRC clients.  The DCC2 negotiation
+   system has also been designed to be extensible to incorporate future
+   technological developments more easily that the original IRCII DCC
+   implementation.
+
+1.3  Conventions
+
+   The key words "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", "MAY" in
+   this document are to be interpreted as described in RFC-2119 [1].
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 3]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+2.  DCC2 Overview
+
+   DCC2 allows IRC clients to negotiate connection settings using a
+   handshake mechanism for agreement to protocol usage.  Protocols
+   available on the offering client are published to the receiving
+   client.  The receiving client can then reply to the offering client,
+   listing the subset of the available protocols that must be used.  The
+   receiving client also has the option to open the connection if the
+   offering client cannot accept incoming connections.
+
+   The available protocols and options are presented as a list of space
+   separated tokens or token=value pairs.  These tokens are standardized
+   and listed here.  Additional tokens can be added through the DCC2.org
+   community process.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 4]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+3.  File Transfers
+
+3.1  Single File
+
+   Single file transfers are initiated over IRC using the DCC2
+   negotiation protocol.  File name, size, and an optional offset are
+   exchanged via IRC messages.  This exchange is covered in the DCC2
+   negotiation documentation.
+
+   After a TCP connection has been established, the offering client
+   sends all the bytes of the file to the receiving client.  The
+   receiving client reads bytes from the connection until SIZE bytes
+   have been read.  In the case of an offset, the client will read
+   SIZE-OFFSET bytes.  When all bytes have been transferred, the
+   receiving client must close the connection.
+
+3.2  Multi File Transfers
+
+3.2.1  Motivation
+
+   With a file transfer established outside of IRC, it is possible to
+   send multiple files and directories since message length is not
+   restricted. This is useful for sending multiple files without
+   possibly being kicked off an IRC server for flooding, or for sending
+   documents in a directory structure.  With additional file metadata,
+   file hashes can optionally be obtained and checked.  Privacy is also
+   increased since file name and size information can be transferred
+   directly between clients without revealing information to a IRC
+   server.  For added privacy, file transfers can optionally be
+   encrypted.
+
+3.2.2  Method
+
+   After a TCP connection has been established, the offering client
+   sends all the bytes of the Multi File header description to the
+   receiving client.  The receiving client reads the header description
+   and sends requests for files over the connection using an identifier,
+   or an identifier and an offset.  The offering client sends the bytes
+   of the requested files in the order the requests arrived.  When the
+   receiving client has received a the files that it wants from the
+   published files list, the receiving client sends a complete message
+   and closes the connection.
+
+3.2.3  Multi Send Syntax
+
+   The DCC2 MULTI protocol allows the receiving client to request a file
+   from a published set, resuming of a file in a published set, and the
+   ability to end a session.  Only the receiving client may send any
+
+
+
+Smith                   Expires November 5, 2004                [Page 5]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+   commands over the connection.  All messages end with the newline
+   character.  The offering client must not send any command syntax.
+   The syntax follows, specified using ABNF rules (as per RFC2234 [3]):
+
+   dcc2-multi = dcc2-multireq | dcc2-multiend LF
+
+   dcc2-multireq       = `SEND FILE=' 1*(alpha|digit) [ space 'OFFSET=' 1*digit ]
+
+   dcc2-multiend = 'COMPLETE'
+
+   Example Receiving client commands
+
+   SEND FILE=0
+   SEND FILE=1 OFFSET=3429342
+   SEND FILE=2
+   COMPLETE
+
+
+3.2.4  Multi Header
+
+3.2.4.1  Description
+
+   The header defines all files that are present in a file transfer.
+   Each file consists of a series of name:value pairs of metadata.  Each
+   file section is seperated by a double newline.  The syntax follows,
+   specified using ABNF rules (as per RFC2234 [3]):
+
+   multi = file-section 0*(LF LF file-section)
+
+   file-section = header-section 0*(header-section)
+
+   header-section = 1*(alpha | digit | '-') ':' SPACE header-value LF
+
+   header-value = 1*(%x01-09 | %x0B-7F)
+
+
+3.2.4.2  Required Header Fields
+
+3.2.4.2.1  id
+
+   A unique value in this header, used to request a file.
+
+3.2.4.2.2  name
+
+   A file name, or a relative path and file name.
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 6]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+3.2.4.2.3  size
+
+   The file size in bytes.
+
+3.2.4.3  Optional Header Fields
+
+3.2.4.3.1  description
+
+   A human readable file description.
+
+3.2.4.3.2  sha1
+
+   A SHA1 file hash, as described by RFC 3174.
+
+3.2.4.3.3  content-type
+
+   The MIME type of the file.
+
+3.2.4.4  Example
+
+   Example Header document:
+
+   id: 1
+   name: /trip-photos/1.jpg
+   size: 435321
+
+   id: 2a
+   name: /trip-photos/2.jpg
+   size: 542672
+
+   id: 4
+   name: /trip-photos/17.jpg
+   size: 203428
+   description: Me and my girl at the airport
+   sha1: a9993e364706816aba3e25717850c26c9cd0d89d
+   content-type: image/jpeg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 7]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+4.  Security Considerations
+
+   Ports under 1024 are privileged on most systems, and should not be
+   used for direct client connections.
+
+   IRC client writers should be careful with directory structures when
+   dealing with file sharing operations.  Relative paths can using ../
+   can lead to security risks
+
+   IRC clients should look carefully at the speed of sending DCC2
+   REFUSED and DCC2 CANNOTACCEPT due to the potential for flooding
+   attacks.  When possible the messages should be sent to give the user
+   context as to why the transfer failed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 8]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+5.  Notes
+
+   This draft is also present on the DCC2 site at the address <http://
+   www.dcc2.org/specifications/draft-smith-irc-dcc2-files-00.txt>.
+   Enriched HTML and XML versions can be found at the addresses <http://
+   www.dcc2.org/specifications/draft-smith-irc-dcc2-files-00.html> and
+   <http://www.dcc2.org/specifications/
+   draft-smith-irc-dcc2-files-00.xml> respectively. The XML version is
+   compliant to RFC-2629 [2].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004                [Page 9]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+6.  Acknowledgments
+
+   This draft was produced by the <http://www.dcc2.org/>; please see
+   <http://www.dcc2.org/members/>.
+
+   Thanks to Marshall Rose for his conversion tools from the RFC-2629
+   [2] XML format to HTML and RFC.
+
+7  References
+
+   [1]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", RFC 2119, BCP 14, March 1997.
+
+   [2]  Rose, M., "Writing I-Ds and RFCs using XML", RFC 2629, June
+        1999.
+
+   [3]  Crocker, D. and P. Overel, "Augmented BNF for Syntax
+        Specifications: ABNF", RFC 2234, November 1997.
+
+
+Author's Address
+
+   Dan Smith (editor)
+   Algenta Technologies L.L.C.
+   1640 Sky Line Dr
+   Stevens Point, WI  54481
+   USA
+
+   Phone: 01-608-213-2867
+   EMail: dan @ algenta
+   URI:   http://www.algenta.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004               [Page 10]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights. Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11. Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard. Please address the information to the IETF Executive
+   Director.
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2004). All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works. However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+
+
+
+Smith                   Expires November 5, 2004               [Page 11]
+
+Internet-Draft          IRC DCC2 File Transfers                 May 2004
+
+
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Smith                   Expires November 5, 2004               [Page 12]
+
+
