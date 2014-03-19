@@ -40,7 +40,7 @@ File Transfer / CTCP extensions
 * XDCC_ (eXtended DCC)
 * `CTCP/2`_
 * SDCC / DCC SCHAT (Secure DCC)
-* DCC Voice
+* `DCC Voice`_
 * `DCC Resume`_
 * `DCC Whiteboard Specification`_
 * Overall comparison_ and explanation of the extensions to DCC.
@@ -52,6 +52,7 @@ File Transfer / CTCP extensions
 .. _DCC REVERSE: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/DCC_REVERSE?rev=1.4
 .. _XDCC: http://xa.bi/files/irc/xdcc.3.3.0b.irc
 .. _CTCP/2: http://www.invlogic.com/irc/ctcp2_intro.html
+.. _DCC Voice: http://www.kvirc.net/doc/cmd_dcc.voice.html
 .. _DCC Resume: http://www.mirc.co.uk/help/dccresum.txt
 .. _DCC Whiteboard Specification: http://www.visualirc.net/tech-wboard.php
 .. _comparison: http://www.kvirc.de/docu/doc_dcc_connection.html
