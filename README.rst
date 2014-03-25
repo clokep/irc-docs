@@ -143,7 +143,7 @@ Services
 * KickServices
 * `Services compatibility`_
 
-IRC+_
+`IRC+`_
 -----
 * `PSYC documentation`_
 * IRC+ `Conference Control Protocol`_
