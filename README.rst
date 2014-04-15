@@ -13,11 +13,12 @@ RFCs (http://www.irchelp.org/irchelp/rfc/)
 * `RFC 2813`_ (IRC server protocol)
 
   * Note: This applies only to servers
-* Summaries of all the numeric codes:
+* Summaries of the numeric codes, modes, etc.:
 
   * http://www.irchelp.org/irchelp/ircd/numerics.html
   * http://www.mirc.net/raws/
   * http://elizabethmyers.me.uk/~elizabeth/numerics/
+  * https://www.alien.net.au/irc/
 
 .. _RFC 1459: http://tools.ietf.org/html/rfc1459
 .. _RFC 2810: http://tools.ietf.org/html/rfc2810
