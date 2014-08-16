@@ -125,7 +125,7 @@ Authentication
 * Auth?
 * Ident_
 
-.. _SASL authentication: http://hg.atheme.org/atheme/raw-file/tip/doc/SASL
+.. _SASL authentication: https://github.com/atheme/atheme/blob/master/doc/SASL
 .. _Simple Authentication and Security Layer (SASL): http://tools.ietf.org/html/rfc4422
 __ http://tools.ietf.org/html/rfc2222
 .. _PLAIN Simple Authentication and Security Layer (SASL) Mechanism: http://tools.ietf.org/html/rfc4616
@@ -210,13 +210,13 @@ Other
 
 .. _Command Prefix Capability: http://tools.ietf.org/html/draft-brocklesby-irc-usercmdpfx-02
 .. _IRCX: http://tools.ietf.org/html/draft-pfenning-irc-extensions-04
-.. _MONITOR: http://hg.atheme.org/charybdis/raw-file/tip/doc/monitor.txt
+.. _MONITOR: https://github.com/atheme/charybdis/blob/master/doc/monitor.txt
 .. _WATCH: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/raw-file/tip/reference/draft-meglio-irc-watch-00.txt
-.. _User Mode +g: http://hg.atheme.org/charybdis/raw-file/tip/doc/modeg.txt
+.. _User Mode +g: https://github.com/atheme/charybdis/blob/master/doc/modeg.txt
 .. _Account-Notify client capability specification: https://github.com/atheme/charybdis/blob/master/doc/account-notify.txt
 .. _Target change for Messages: https://github.com/atheme/charybdis/blob/master/doc/tgchange.txt
 .. _NAMESX: http://wiki.inspircd.org/Modules/namesx
-.. _Extended Join: http://git.atheme.org/charybdis/plain/doc/extended-join.txt
+.. _Extended Join: https://github.com/atheme/charybdis/blob/master/doc/extended-join.txt
 .. _TS4: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/TS4?rev=1.1.1.1
 .. _Handshake: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/raw-file/tip/reference/draft-meglio-irc-handshake-00.txt
 .. _snomasks: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/raw-file/tip/reference/snomasks.txt
